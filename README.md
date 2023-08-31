@@ -8,3 +8,4 @@ Dự án bao gồm đầy đủ các base được thiết kế cho 1 project ho
 - Các popup, menu, sound được đặt trong scriptableobject, sử dụng để config
 - Thiết kế đầy đủ các base cần dùng trong dự án (Lưu trữ - Âm Thanh, ..)
 - Dự án tiếp tục được thiết kế và phát triển (Thêm skin vũ khí + Thêm shop)
+- Reponsive UI trên các màn hình điện thoại khác nhau (Chiều ngang)
