@@ -7,4 +7,4 @@ Dự án bao gồm đầy đủ các base được thiết kế cho 1 project ho
 - Singleton sử dụng chủ yếu trong dự án
 - Các popup, menu, sound được đặt trong scriptableobject, sử dụng để config
 - Thiết kế đầy đủ các base cần dùng trong dự án (Lưu trữ - Âm Thanh, ..)
-- Dự án tiếp tục được thiết kế và phát triển
+- Dự án tiếp tục được thiết kế và phát triển (Thêm skin vũ khí + Thêm shop)
