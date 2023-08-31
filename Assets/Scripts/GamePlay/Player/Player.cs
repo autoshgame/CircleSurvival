@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     public int Level { get => level; set => level = value; }
     public PlayerType PlayerType { get => playerType; set => playerType = value; }
 
-    private void Awake()
+    protected virtual void Start()
     {
         this.textLvl.text = "0";
     }

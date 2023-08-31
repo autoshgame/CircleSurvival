@@ -35,16 +35,41 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 1
-    _keyValues: 0000000005000000
-    _keys: 0000000005000000
+    _keyValues: 00000000040000000500000006000000070000000800000009000000
+    _keys: 00000000040000000500000006000000070000000800000009000000
     _values:
     - image: {fileID: 21300000, guid: 9920e4267c67e9a47938cabab5d1501b, type: 3}
       posCollider: {x: 0, y: 0, z: 0}
       offsetCollider: {x: 0.0007240375, y: 0.42752302}
       sizeCollider: {x: 0.076039396, y: 0.3036754}
       type: 2
+    - image: {fileID: 21300000, guid: 9b06e991670e8ad41ad63f7b2d5fdbe9, type: 3}
+      posCollider: {x: 0, y: 0, z: 0}
+      offsetCollider: {x: -0.000112871334, y: 0.46357596}
+      sizeCollider: {x: 0.08106085, y: 0.31050262}
+      type: 2
     - image: {fileID: 21300000, guid: 473564577ca915d4f802070f8af1b925, type: 3}
       posCollider: {x: 0, y: 0, z: 0}
       offsetCollider: {x: -0.000112871334, y: 0.46357596}
       sizeCollider: {x: 0.08106085, y: 0.31050262}
+      type: 2
+    - image: {fileID: 21300000, guid: 8f8f7bc1ff75a814b8a19e6c2630b800, type: 3}
+      posCollider: {x: 0, y: 0, z: 0}
+      offsetCollider: {x: 0.0007240375, y: 0.427523}
+      sizeCollider: {x: 0.0760394, y: 0.3036754}
+      type: 2
+    - image: {fileID: 21300000, guid: 9a6883700813abd45a8c68993c73e875, type: 3}
+      posCollider: {x: 0, y: 0, z: 0}
+      offsetCollider: {x: 0.0007240375, y: 0.40014264}
+      sizeCollider: {x: 0.076039396, y: 0.24891464}
+      type: 2
+    - image: {fileID: 21300000, guid: d30cafa79afe2f241afa7bf46a78f9ce, type: 3}
+      posCollider: {x: 0, y: 0, z: 0}
+      offsetCollider: {x: 0.0007240375, y: 0.42752302}
+      sizeCollider: {x: 0.076039396, y: 0.3036754}
+      type: 2
+    - image: {fileID: 21300000, guid: 4a132f5fd14d9f54eb1f314534e74a59, type: 3}
+      posCollider: {x: 0, y: 0, z: 0}
+      offsetCollider: {x: 0.0007240375, y: 0.427523}
+      sizeCollider: {x: 0.0760394, y: 0.3036754}
       type: 2

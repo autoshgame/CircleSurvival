@@ -12,6 +12,12 @@ public class Human : Player
         humanState = HumanState.ALIVE;
     }
 
+    protected override void Start()
+    {
+        base.Start();
+        sword.InitSword(SwordEnum.SWORD_9);
+    }
+
     void Update()
     {
         if (humanState != HumanState.DEAD) {

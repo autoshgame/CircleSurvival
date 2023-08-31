@@ -13,8 +13,9 @@ public class Bot : Player
         humanState = HumanState.ALIVE;
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         ScanPlayer();
     }
 

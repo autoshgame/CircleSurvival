@@ -25,6 +25,10 @@ public enum SwordEnum
     SWORD_4,
     SWORD_5,
     SWORD_6,
+    SWORD_7,
+    SWORD_8,
+    SWORD_9,
+    SWORD_10,
 }
 
 public enum ResourceType
