@@ -400,6 +400,9 @@ MonoBehaviour:
   _persistent: 1
   userData:
     sliderValue: 0
+    coin: 0
+    availableSword: 00000000
+    currentSword: 0
 --- !u!4 &1190300581
 Transform:
   m_ObjectHideFlags: 0

@@ -15,6 +15,7 @@ public class SwordProps
     public Vector2 offsetCollider;
     public Vector2 sizeCollider;
     public ResourceType type;
+    public int coin;
 }
 
 public enum SwordEnum

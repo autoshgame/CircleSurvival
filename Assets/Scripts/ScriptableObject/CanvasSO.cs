@@ -14,6 +14,7 @@ public enum Popup
     LosePopup,
     PausePopup,
     WinPopup,
+    ShopPopup,
 }
 
 public enum Menu

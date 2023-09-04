@@ -886,8 +886,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playButton: {fileID: 7351947961431308548}
-  shopButton: {fileID: 0}
-  exitButton: {fileID: 0}
+  shopButton: {fileID: 7351947960786791433}
+  exitButton: {fileID: 7351947960897575059}
   settingButton: {fileID: 7351947960346485968}
 --- !u!1 &7351947961374999668
 GameObject:

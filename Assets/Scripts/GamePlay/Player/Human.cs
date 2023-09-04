@@ -15,7 +15,7 @@ public class Human : Player
     protected override void Start()
     {
         base.Start();
-        sword.InitSword(SwordEnum.SWORD_9);
+        sword.InitSword(GameData.Instance.GetUserData().currentSword);
     }
 
     void Update()

@@ -388,6 +388,7 @@ MonoBehaviour:
   - {fileID: 634010605}
   - {fileID: 2040106559}
   deadBots: []
+  randomSword: 00000000040000000500000006000000070000000800000009000000
 --- !u!4 &755132388
 Transform:
   m_ObjectHideFlags: 0

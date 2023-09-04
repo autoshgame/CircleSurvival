@@ -12,6 +12,7 @@ public class HomeMenu : BaseMenu
     {
         playButton.onClick.AddListener(StartGame);
         settingButton.onClick.AddListener(OpenSetting);
+        shopButton.onClick.AddListener(OpenShop);
     }
 
     void StartGame()
@@ -22,5 +23,10 @@ public class HomeMenu : BaseMenu
     void OpenSetting()
     {
         SingletonUI.Instance.Push(Popup.PausePopup);
+    }
+
+    void OpenShop()
+    {
+        SingletonUI.Instance.Push(Popup.ShopPopup);
     }
 }
