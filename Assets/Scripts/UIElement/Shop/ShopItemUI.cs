@@ -41,20 +41,40 @@ public class ShopItemUI : MonoBehaviour
         }
     }
 
+    public void HideSelected()
+    {
+        this.selectedTxt.gameObject.SetActive(false);
+    }
+
     void BuySkin()
     {
+        if (GameData.Instance.GetUserData().currentSword == this.sword)
+        {
+            return;
+        }
+
         if (GameData.Instance.GetUserData().availableSword.Contains(this.sword))
         {
             GameData.Instance.SelectSwordSkin(sword);
         }
-
-        if (GameData.Instance.GetUserData().coin > swordSkinSO.props[this.sword].coin)
+        else
         {
-            GameData.Instance.SetCoin(GameData.Instance.GetUserData().coin - swordSkinSO.props[this.sword].coin);
-            GameData.Instance.SelectSwordSkin(sword);
-            GameData.Instance.AddSwordSkin(sword);
-            moneyTxt.gameObject.SetActive(false);
-            selectedTxt.gameObject.SetActive(true);
+            if (GameData.Instance.GetUserData().coin > swordSkinSO.props[this.sword].coin)
+            {
+                GameData.Instance.SetCoin(GameData.Instance.GetUserData().coin - swordSkinSO.props[this.sword].coin);
+                ((ShopPopup)SingletonUI.Instance.Get(Popup.ShopPopup)).UpdateMoney();
+                GameData.Instance.SelectSwordSkin(sword);
+                GameData.Instance.AddSwordSkin(sword);
+            }
+            else
+            {
+                return;
+            }
         }
+
+        moneyTxt.gameObject.SetActive(false);
+        selectedTxt.gameObject.SetActive(true);
+        ((ShopPopup)SingletonUI.Instance.Get(Popup.ShopPopup)).ItemSelected.HideSelected();
+        ((ShopPopup)SingletonUI.Instance.Get(Popup.ShopPopup)).ItemSelected = this;
     }
 }

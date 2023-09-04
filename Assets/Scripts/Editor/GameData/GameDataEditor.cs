@@ -10,10 +10,8 @@ public class GameDataEditor : Editor
         GameData a = (GameData)target;
 
         string filepath = Application.persistentDataPath + "/data.json";
-
         if (GUILayout.Button("ResetData")) {
             a.ResetUserData(filepath);
         }    
-
     }
 }
