@@ -24,12 +24,12 @@ public class FailedPopup : BasePopup
 
     public override void Show()
     {
+        this.gameObject.SetActive(true);
         StartCoroutine(IShow());
     }
 
     IEnumerator IShow()
     {
-        this.gameObject.SetActive(true);
         rect.DOAnchorPos3D(endPos, 0.8f).SetUpdate(true);
         yield return new WaitForSecondsRealtime(0.8f);
         if (data.canReceiveCoin)

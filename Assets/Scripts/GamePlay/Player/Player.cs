@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
 
     public virtual void UpdateLevel()
     {
-        if (level < 18)
+        if (level < BaseGameManager.Instance.winLevel)
         {
             level++;
             textLvl.text = level.ToString();

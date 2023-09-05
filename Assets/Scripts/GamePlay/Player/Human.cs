@@ -54,7 +54,7 @@ public class Human : Player
     public override void UpdateLevel()
     {
         base.UpdateLevel();
-        if (level == BaseGameManager.Instance.maxLevelReward)
+        if (level == BaseGameManager.Instance.winLevel)
         {
             BaseGameManager.Instance.WinGame();
         }

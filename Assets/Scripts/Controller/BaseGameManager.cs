@@ -3,9 +3,9 @@ using UnityEngine;
 public class BaseGameManager : Singleton<BaseGameManager>
 {
     public int maxLevelReward;
+    public int winLevel;
     public GameState gameState;
     public Human player;
-
 
     private void Awake()
     {

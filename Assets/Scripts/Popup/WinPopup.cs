@@ -19,8 +19,8 @@ public class WinPopup : BasePopup
 
     public override void Show()
     {
-        Time.timeScale = 0;
         this.gameObject.SetActive(true);
+        Time.timeScale = 0;
         StartCoroutine(IShowCoin(data.coinReceived));
     }
 
