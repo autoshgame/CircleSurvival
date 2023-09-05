@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
+using System.Collections;
 
 public class ShopPopup : BasePopup
 {
@@ -16,20 +18,27 @@ public class ShopPopup : BasePopup
 
     private void Start()
     {
+        transform.localScale = Vector3.zero;
         closeButton.onClick.AddListener(Close);
-        InitShopUI();
-        UpdateMoney();
     }
 
     public override void Show()
     {
         this.gameObject.SetActive(true);
+        transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBounce);
         InitShopUI();
         UpdateMoney();
     }
 
     public override void Close()
     {
+        StartCoroutine(IClose());
+    }
+
+    IEnumerator IClose()
+    {
+        transform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.InOutSine);
+        yield return new WaitForSecondsRealtime(0.3f);
         this.gameObject.SetActive(false);
     }
 

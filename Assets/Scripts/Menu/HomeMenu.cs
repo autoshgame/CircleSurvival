@@ -28,7 +28,7 @@ public class HomeMenu : BaseMenu
 
     void OpenShop()
     {
-        SingletonUI.Instance.Push(Popup.ShopPopup);
+        SingletonUI.Instance.Push(Popup.ShopPopup).Show();
     }
 
     void ExitGame()
