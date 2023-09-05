@@ -25,6 +25,7 @@ public class ShopPopup : BasePopup
     {
         this.gameObject.SetActive(true);
         InitShopUI();
+        UpdateMoney();
     }
 
     public override void Close()

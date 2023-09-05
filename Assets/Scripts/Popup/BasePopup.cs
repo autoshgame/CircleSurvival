@@ -5,7 +5,8 @@ public class BasePopup : MonoBehaviour
 {
     public RectTransform rect;
 
-    public virtual void InitData<T>(T args) { 
+    public virtual BasePopup InitData<T>(T args) {
+        return this;
     }
 
     public virtual void Show() { 

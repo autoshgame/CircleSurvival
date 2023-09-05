@@ -54,9 +54,9 @@ public class Human : Player
     public override void UpdateLevel()
     {
         base.UpdateLevel();
-        if (level == 18)
+        if (level == BaseGameManager.Instance.maxLevelReward)
         {
-            SingletonUI.Instance.Push(Popup.WinPopup);
+            BaseGameManager.Instance.WinGame();
         }
     }
 }

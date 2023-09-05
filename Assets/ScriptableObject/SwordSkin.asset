@@ -49,34 +49,34 @@ MonoBehaviour:
       offsetCollider: {x: -0.000112871334, y: 0.46357596}
       sizeCollider: {x: 0.08106085, y: 0.31050262}
       type: 2
-      coin: 10
+      coin: 200
     - image: {fileID: 21300000, guid: 473564577ca915d4f802070f8af1b925, type: 3}
       posCollider: {x: 0, y: 0, z: 0}
       offsetCollider: {x: -0.000112871334, y: 0.46357596}
       sizeCollider: {x: 0.08106085, y: 0.31050262}
       type: 2
-      coin: 9
+      coin: 180
     - image: {fileID: 21300000, guid: 8f8f7bc1ff75a814b8a19e6c2630b800, type: 3}
       posCollider: {x: 0, y: 0, z: 0}
       offsetCollider: {x: 0.0007240375, y: 0.427523}
       sizeCollider: {x: 0.0760394, y: 0.3036754}
       type: 2
-      coin: 8
+      coin: 1000
     - image: {fileID: 21300000, guid: 9a6883700813abd45a8c68993c73e875, type: 3}
       posCollider: {x: 0, y: 0, z: 0}
       offsetCollider: {x: 0.0007240375, y: 0.40014264}
       sizeCollider: {x: 0.076039396, y: 0.24891464}
       type: 2
-      coin: 7
+      coin: 900
     - image: {fileID: 21300000, guid: d30cafa79afe2f241afa7bf46a78f9ce, type: 3}
       posCollider: {x: 0, y: 0, z: 0}
       offsetCollider: {x: 0.0007240375, y: 0.42752302}
       sizeCollider: {x: 0.076039396, y: 0.3036754}
       type: 2
-      coin: 6
+      coin: 900
     - image: {fileID: 21300000, guid: 4a132f5fd14d9f54eb1f314534e74a59, type: 3}
       posCollider: {x: 0, y: 0, z: 0}
       offsetCollider: {x: 0.0007240375, y: 0.427523}
       sizeCollider: {x: 0.0760394, y: 0.3036754}
       type: 2
-      coin: 5
+      coin: 1200

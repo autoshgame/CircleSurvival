@@ -1,41 +1,69 @@
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
+using TMPro;
+using System.Collections;
 
 public class WinPopup : BasePopup
 {
     [SerializeField] private Button homeButton;
     [SerializeField] private Button restartButton;
+    [SerializeField] private TextMeshProUGUI txtCoin;
 
-    [SerializeField] private Vector3 startPos;
-    [SerializeField] private Vector3 endPos;
+    private WinPopupData data;
 
     private void Start()
     {
-        Time.timeScale = 0;
-        startPos = rect.anchoredPosition3D;
-        rect.DOAnchorPos3D(endPos, 0.8f).SetUpdate(true);
         homeButton.onClick.AddListener(BackToHome);
         restartButton.onClick.AddListener(Restart);
     }
 
     public override void Show()
     {
+        Time.timeScale = 0;
         this.gameObject.SetActive(true);
-        rect.DOAnchorPos3D(endPos, 0.8f).SetUpdate(true);
+        StartCoroutine(IShowCoin(data.coinReceived));
+    }
+
+    public override BasePopup InitData<T>(T args)
+    {
+        WinPopupData data = args as WinPopupData;
+        this.data = data;
+        return base.InitData(args);
     }
 
     public void BackToHome()
     {
-        GameSceneManager.Instance.LoadHome();
         Time.timeScale = 1;
-        rect.DOAnchorPos3D(startPos, 0.8f).SetUpdate(true);
+        GameSceneManager.Instance.LoadHome();
     }
 
     public void Restart()
     {
-        GameSceneManager.Instance.LoadGamePlay();
         Time.timeScale = 1;
-        rect.DOAnchorPos3D(startPos, 0.8f).SetUpdate(true);
+        GameSceneManager.Instance.LoadGamePlay();
+    }
+
+    IEnumerator IShowCoin(int coinReceived)
+    {
+        int tempCoin = 0;
+
+        while (tempCoin < coinReceived)
+        {
+            tempCoin++;
+            txtCoin.text = tempCoin.ToString();
+            yield return new WaitForSecondsRealtime(0.1f);
+        }
+    }
+}
+
+
+[System.Serializable]
+public class WinPopupData
+{
+    public int coinReceived;
+
+    public WinPopupData(int coinReceived)
+    {
+        this.coinReceived = coinReceived;
     }
 }

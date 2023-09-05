@@ -452,6 +452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _persistent: 0
+  maxLevelReward: 2
   gameState: 0
   player: {fileID: 2120772136}
 --- !u!1001 &1203052149
