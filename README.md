@@ -9,3 +9,5 @@ Dự án bao gồm đầy đủ các base được thiết kế cho 1 project ho
 - Thiết kế đầy đủ các base cần dùng trong dự án (Lưu trữ - Âm Thanh, ..)
 - Dự án tiếp tục được thiết kế và phát triển (Thêm skin vũ khí + Thêm shop)
 - Reponsive UI trên các màn hình điện thoại khác nhau (Chiều ngang)
+
+Link sp : https://drive.google.com/file/d/1dJ46WZz7bPdouUE4Fd39CMxJiVjbT1gk/view?usp=sharing
