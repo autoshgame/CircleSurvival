@@ -18,13 +18,12 @@ public class ShopPopup : BasePopup
 
     private void Start()
     {
-        transform.localScale = Vector3.zero;
         closeButton.onClick.AddListener(Close);
     }
 
     public override void Show()
     {
-        this.gameObject.SetActive(true);
+        transform.localScale = Vector3.zero;
         transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBounce);
         InitShopUI();
         UpdateMoney();
@@ -39,7 +38,7 @@ public class ShopPopup : BasePopup
     {
         transform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.InOutSine);
         yield return new WaitForSecondsRealtime(0.3f);
-        this.gameObject.SetActive(false);
+        Destroy(this.gameObject);
     }
 
     public void UpdateMoney()
@@ -61,6 +60,7 @@ public class ShopPopup : BasePopup
             bool isSelected = GameData.Instance.GetUserData().currentSword == entry.Key;
             ShopItemUI itemUI = item.GetComponent<ShopItemUI>();
             itemUI.Init(entry.Key, entry.Value.coin.ToString(), entry.Value.image, ownSkin, isSelected);
+
             if (isSelected == true)
             {
                 itemSelected = itemUI;

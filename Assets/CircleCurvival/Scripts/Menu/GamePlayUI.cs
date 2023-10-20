@@ -13,6 +13,11 @@ public class GamePlayUI : BaseMenu
         settingButton.onClick.AddListener(ShowSettingPopup);    
     }
 
+    public override void Show()
+    {
+        this.gameObject.SetActive(true);
+    }
+
     public void ShowSettingPopup()
     {
         SingletonUI.Instance.Push(Popup.PausePopup);

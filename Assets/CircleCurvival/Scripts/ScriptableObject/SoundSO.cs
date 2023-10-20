@@ -7,7 +7,6 @@ public class SoundSO : ScriptableObject
     public SerializableDictionaryBase<string, AudioClip> props;
 }
 
-
 public class SoundUtils
 {
     public static string BGM = "Main_Music";

@@ -14,16 +14,18 @@ public class SingletonUI: Singleton<SingletonUI>
     {
         if (availablePopups.ContainsKey(popup))
         {
-            availablePopups[popup].Show();
-            return availablePopups[popup];
+            if (availablePopups[popup] != null)
+            {
+                availablePopups[popup].Show();
+                return availablePopups[popup];
+            }
+            availablePopups.Remove(popup);
         }
-        else
-        {
-            GameObject ele = Instantiate(canvasSO.popups[popup].gameObject, baseCanvas.transform);
-            BasePopup data = ele.GetComponent<BasePopup>();
-            availablePopups.Add(popup, data);
-            return data;
-        }
+
+        GameObject ele = Instantiate(canvasSO.popups[popup].gameObject, baseCanvas.transform);
+        BasePopup data = ele.GetComponent<BasePopup>();
+        availablePopups.Add(popup, data);
+        return data;
     }
 
     public BasePopup Get(Popup popup)
@@ -41,16 +43,18 @@ public class SingletonUI: Singleton<SingletonUI>
     {
         if (availableMenus.ContainsKey(menu))
         {
-            availableMenus[menu].gameObject.SetActive(true);
-            return availableMenus[menu];
+            if (availableMenus[menu].isActiveAndEnabled)
+            {
+                availableMenus[menu].Show();
+                return availableMenus[menu];
+            }
+            availableMenus.Remove(menu);
         }
-        else
-        {
-            GameObject ele = Instantiate(canvasSO.menus[menu].gameObject, baseCanvas.transform);
-            BaseMenu data = ele.GetComponent<BaseMenu>();
-            availableMenus.Add(menu, data);
-            return data;
-        }
+
+        GameObject ele = Instantiate(canvasSO.menus[menu].gameObject, baseCanvas.transform);
+        BaseMenu data = ele.GetComponent<BaseMenu>();
+        availableMenus.Add(menu, data);
+        return data;
     }
 
     public BaseMenu Get(Menu menu)
@@ -68,12 +72,18 @@ public class SingletonUI: Singleton<SingletonUI>
     {
         foreach (var item in availablePopups)
         {
-            Pop(item.Value.gameObject);
+            if (item.Value != null)
+            {
+                Pop(item.Value.gameObject);
+            }
         }
 
         foreach (var item in availableMenus)
         {
-            Pop(item.Value.gameObject);
+            if (item.Value != null)
+            {
+                Pop(item.Value.gameObject);
+            }
         }
     }
 

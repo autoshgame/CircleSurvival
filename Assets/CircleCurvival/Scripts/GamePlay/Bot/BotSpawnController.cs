@@ -13,14 +13,14 @@ public class BotSpawnController : Singleton<BotSpawnController>
     int randomIndex = 0;
     int randomLevelSpawn = 0;
 
-    Vector3 posSpawn;
-
     float xMaxPositive = 0;
     float xMinPositive = 0;
     float xMaxNegative = 0;
     float xMinNegative = 0;
     float xSpawn = 0;
     float ySpawn = 0;
+
+    Vector3 posSpawn;
 
     public List<Bot> AliveBots { get => aliveBots; set => aliveBots = value; }
 
@@ -58,6 +58,7 @@ public class BotSpawnController : Singleton<BotSpawnController>
                 if (aliveBots.Count < 7)
                 {
                     int totalBotCanSpawn = 7 - aliveBots.Count;
+
                     for (int i = 0; i < totalBotCanSpawn; ++i)
                     {
                         if (deadBots.Count > 0)
@@ -79,19 +80,12 @@ public class BotSpawnController : Singleton<BotSpawnController>
                             xMaxNegative = BaseGameManager.Instance.player.transform.position.x - 8;
                             xMinNegative = BaseGameManager.Instance.player.transform.position.x - 15;
 
-                            ySpawn = Random.Range(yMin, yMax);
                             int option = Random.Range(0, 2);
-
-                            if (option == 1)
-                            {
-                                xSpawn = Random.Range(xMinNegative, xMaxNegative);
-                            } 
-                            else
-                            {
-                                xSpawn = Random.Range(xMinPositive, xMaxPositive);
-                            }
+                            xSpawn = option == 1 ? Random.Range(xMinNegative, xMaxNegative) : Random.Range(xMinPositive, xMaxPositive);
+                            ySpawn = Random.Range(yMin, yMax);
 
                             posSpawn = new Vector3(xSpawn, ySpawn, 0);
+
                             if (!alreadySpawnPos.Contains(posSpawn) && posSpawn != BaseGameManager.Instance.player.transform.position)
                             {
                                 alreadySpawnPos.Add(posSpawn);
@@ -103,6 +97,7 @@ public class BotSpawnController : Singleton<BotSpawnController>
                     
                 }
             }
+
             yield return new WaitForSeconds(delay);
         }
     }

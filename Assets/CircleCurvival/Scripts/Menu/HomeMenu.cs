@@ -16,6 +16,11 @@ public class HomeMenu : BaseMenu
         exitButton.onClick.AddListener(ExitGame);
     }
 
+    public override void Show()
+    {
+        this.gameObject.SetActive(true);
+    }
+
     void StartGame()
     {
         GameSceneManager.Instance.LoadGamePlay();

@@ -80,7 +80,8 @@ public class Bot : Player
             if (distancePlayer <= distance)
             {
                 targetPlayer = BaseGameManager.Instance.player;
-            } else
+            } 
+            else
             {
                 targetPlayer = BotSpawnController.Instance.AliveBots[foundIndex];
             }

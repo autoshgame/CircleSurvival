@@ -21,24 +21,8 @@ public class ShopItemUI : MonoBehaviour
         this.sword = sword;
         moneyTxt.text = text;
         this.image.sprite = image;
-
-        if (owned == true) 
-        {
-            moneyTxt.gameObject.SetActive(false);
-        } 
-        else 
-        {
-            moneyTxt.gameObject.SetActive(true);
-        }
-
-        if (selected == true)
-        {
-            selectedTxt.gameObject.SetActive(true);
-        }
-        else
-        {
-            selectedTxt.gameObject.SetActive(false);
-        }
+        moneyTxt.gameObject.SetActive(!owned);
+        selectedTxt.gameObject.SetActive(selected);
     }
 
     public void HideSelected()
@@ -59,17 +43,11 @@ public class ShopItemUI : MonoBehaviour
         }
         else
         {
-            if (GameData.Instance.GetUserData().coin > swordSkinSO.props[this.sword].coin)
-            {
-                GameData.Instance.SetCoin(GameData.Instance.GetUserData().coin - swordSkinSO.props[this.sword].coin);
-                ((ShopPopup)SingletonUI.Instance.Get(Popup.ShopPopup)).UpdateMoney();
-                GameData.Instance.SelectSwordSkin(sword);
-                GameData.Instance.AddSwordSkin(sword);
-            }
-            else
-            {
-                return;
-            }
+            if (GameData.Instance.GetUserData().coin < swordSkinSO.props[this.sword].coin) return;
+            GameData.Instance.SetCoin(GameData.Instance.GetUserData().coin - swordSkinSO.props[this.sword].coin);
+            ((ShopPopup)SingletonUI.Instance.Get(Popup.ShopPopup)).UpdateMoney();
+            GameData.Instance.SelectSwordSkin(sword);
+            GameData.Instance.AddSwordSkin(sword);
         }
 
         moneyTxt.gameObject.SetActive(false);
