@@ -424,6 +424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   btn: {fileID: 8132459256062133706}
+  screenInfo: 5
 --- !u!1 &8132459256550177424
 GameObject:
   m_ObjectHideFlags: 0

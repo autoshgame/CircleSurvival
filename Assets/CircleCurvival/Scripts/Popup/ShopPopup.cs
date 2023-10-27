@@ -13,6 +13,7 @@ public class ShopPopup : BasePopup
     [SerializeField] private Button closeButton;
     [SerializeField] private ShopItemUI itemSelected;
     [SerializeField] private TextMeshProUGUI coins;
+    [SerializeField] private AudioSource audioSource;
 
     public ShopItemUI ItemSelected { get => itemSelected; set => itemSelected = value; }
 

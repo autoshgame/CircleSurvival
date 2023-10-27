@@ -5,7 +5,6 @@ using System;
 public class Spinner : MonoBehaviour
 {
     [SerializeField] private float rotationSpeed;
-    [SerializeField] private float timeSceneRotate = 0;
     [SerializeField] private DateTime timeStartSpin;
     [SerializeField] private DateTime timeEndSpin;
     [SerializeField] private bool canSpin = true;

@@ -4,6 +4,7 @@ using UnityEngine;
 public class ButtonClick : MonoBehaviour
 {
     [SerializeField] private Button btn;
+    [SerializeField] private ScreenInfo screenInfo;
 
     void Start()
     {
@@ -14,4 +15,14 @@ public class ButtonClick : MonoBehaviour
     {
         SoundManager.Instance.PlayAudio(SoundUtils.BUTTON_CLICK);
     }
+}
+
+
+public enum ScreenInfo {
+    MainScreen,
+    SPL, 
+    HomeScene,
+    NavigatorScene,
+    DebugScene,
+    ShopScene,
 }

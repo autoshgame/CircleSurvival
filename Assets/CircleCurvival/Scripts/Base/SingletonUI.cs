@@ -7,8 +7,8 @@ public class SingletonUI: Singleton<SingletonUI>
 
     [SerializeField] private CanvasSO canvasSO;
 
-    private Dictionary<Popup, BasePopup> availablePopups = new Dictionary<Popup, BasePopup>();
-    private Dictionary<Menu, BaseMenu> availableMenus = new Dictionary<Menu, BaseMenu>();
+    private readonly Dictionary<Popup, BasePopup> availablePopups = new Dictionary<Popup, BasePopup>();
+    private readonly Dictionary<Menu, BaseMenu> availableMenus = new Dictionary<Menu, BaseMenu>();
 
     public BasePopup Push(Popup popup)
     {
@@ -30,10 +30,14 @@ public class SingletonUI: Singleton<SingletonUI>
 
     public BasePopup Get(Popup popup)
     {
-        if (availablePopups.ContainsKey(popup))
+        if (availablePopups.ContainsKey(popup) && availablePopups[popup] != null)
         {
             return availablePopups[popup];
         }
+
+        Debug.LogError("hey YOU, WATCH OUT");
+        Debug.LogError("VS CODE TON RAM VAI CA LON LUON AY");
+        Debug.LogError("DIT CON ME NHA NO NUA HAHAHA");
 
         Debug.LogError("WARNING , POPUP " + popup.ToString() + " DONT EXSISTS");
         return null;
@@ -43,7 +47,7 @@ public class SingletonUI: Singleton<SingletonUI>
     {
         if (availableMenus.ContainsKey(menu))
         {
-            if (availableMenus[menu].isActiveAndEnabled)
+            if (availableMenus[menu] != null)
             {
                 availableMenus[menu].Show();
                 return availableMenus[menu];

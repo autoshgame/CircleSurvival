@@ -37,19 +37,16 @@ public class ShopItemUI : MonoBehaviour
             return;
         }
 
-        if (GameData.Instance.GetUserData().availableSword.Contains(this.sword))
-        {
-            GameData.Instance.SelectSwordSkin(sword);
-        }
-        else
+        if (!GameData.Instance.GetUserData().availableSword.Contains(this.sword)) 
         {
             if (GameData.Instance.GetUserData().coin < swordSkinSO.props[this.sword].coin) return;
+            
             GameData.Instance.SetCoin(GameData.Instance.GetUserData().coin - swordSkinSO.props[this.sword].coin);
             ((ShopPopup)SingletonUI.Instance.Get(Popup.ShopPopup)).UpdateMoney();
-            GameData.Instance.SelectSwordSkin(sword);
             GameData.Instance.AddSwordSkin(sword);
         }
 
+        GameData.Instance.SelectSwordSkin(sword);
         moneyTxt.gameObject.SetActive(false);
         selectedTxt.gameObject.SetActive(true);
         ((ShopPopup)SingletonUI.Instance.Get(Popup.ShopPopup)).ItemSelected.HideSelected();
