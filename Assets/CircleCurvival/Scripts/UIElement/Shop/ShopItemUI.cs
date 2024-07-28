@@ -19,8 +19,8 @@ public class ShopItemUI : MonoBehaviour
     public void Init(SwordEnum sword, string text, Sprite image, bool owned = false, bool selected = false)
     {
         this.sword = sword;
-        moneyTxt.text = text;
         this.image.sprite = image;
+        moneyTxt.text = text;
         moneyTxt.gameObject.SetActive(!owned);
         selectedTxt.gameObject.SetActive(selected);
     }

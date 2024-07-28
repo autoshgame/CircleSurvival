@@ -13,7 +13,7 @@ public class ButtonClick : MonoBehaviour
 
     void PlaySound()
     {
-        SoundManager.Instance.PlayAudio(SoundUtils.BUTTON_CLICK);
+        SoundManager.Instance.PlayAudioOneShot(SoundUtils.BUTTON_CLICK);
     }
 }
 

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Sword : BaseWeapon
@@ -10,6 +8,8 @@ public class Sword : BaseWeapon
     [SerializeField] private TriggerRotate trigger;
     [SerializeField] private SpriteRenderer swordSprite;
 
+
+    //Hard Code + Ram management
     [Header("Scriptable Object")]
     [SerializeField] private SwordSO swordSO;
     [SerializeField] private SwordSkinSO swordSkinSO;
@@ -27,7 +27,8 @@ public class Sword : BaseWeapon
 
     void Update()
     {
-        if (human != null) {
+        if (human != null) 
+        {
             this.transform.position = human.position;
         }
     }
@@ -36,14 +37,14 @@ public class Sword : BaseWeapon
     public void InitSword(SwordEnum sword)
     {
         swordSprite.sprite = swordSkinSO.props[sword].image;
-        this.transform.localScale = swordSO.props[level].scale;
+        transform.localScale = swordSO.props[level].scale;
         trigger.SetColliderOffset(swordSkinSO.props[sword].offsetCollider);
         trigger.SetColliderSize(swordSkinSO.props[sword].sizeCollider);
     }
 
     public void SetLevel(int level)
     {
-        if (level < 18)
+        if (level < swordSO.props.Count)
         {
             this.level = level;
             rotate.UpdateRotateSpeed(swordSO.props[level].rotateSpeed);
@@ -53,7 +54,7 @@ public class Sword : BaseWeapon
 
     public override void UpdateLevel()
     {
-        if (level < 18)
+        if (level < swordSO.props.Count)
         {
             level++;
             rotate.UpdateRotateSpeed(swordSO.props[level].rotateSpeed);

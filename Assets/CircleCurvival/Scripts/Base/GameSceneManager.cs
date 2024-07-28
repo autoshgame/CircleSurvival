@@ -1,5 +1,5 @@
 using UnityEngine.SceneManagement;
-
+using AutoShGame.Base.MonoSingleton;
 public class GameSceneManager : Singleton<GameSceneManager>
 {
     public void LoadGamePlay()

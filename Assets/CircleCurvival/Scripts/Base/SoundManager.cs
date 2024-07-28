@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.Audio;
-
+using AutoShGame.Base.MonoSingleton;
 public class SoundManager : Singleton<SoundManager>
 {
     [SerializeField] private SoundSO soundSO;
@@ -14,7 +14,7 @@ public class SoundManager : Singleton<SoundManager>
         HandleAudioVolumeChange(Mathf.Log10(GameData.Instance.GetUserData().sliderValue) * 20);
     }
 
-    public void PlayAudio(string audioName)
+    public void PlayAudioOneShot(string audioName)
     {
         audioSource.PlayOneShot(SoundSO.props[audioName]);
     }

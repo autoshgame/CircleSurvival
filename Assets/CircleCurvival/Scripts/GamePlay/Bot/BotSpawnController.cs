@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using AutoShGame.Base.MonoSingleton;
 public class BotSpawnController : Singleton<BotSpawnController>
 {
     [SerializeField] private List<Bot> aliveBots;

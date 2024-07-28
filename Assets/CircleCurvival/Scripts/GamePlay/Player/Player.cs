@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
         this.textLvl.text = "0";
     }
 
+    //TO-DO : Abstraction
     public virtual void Dead()
     {
         this.humanState = HumanState.DEAD;
@@ -41,6 +42,7 @@ public class Player : MonoBehaviour
         audioSource.PlayOneShot(SoundManager.Instance.SoundSO.props[SoundUtils.HUMAN_DEATH]);
     }
 
+    //TO-DO : Abstraction 
     public virtual void Revive(Vector2 revivePos)
     {
         this.humanState = HumanState.ALIVE;

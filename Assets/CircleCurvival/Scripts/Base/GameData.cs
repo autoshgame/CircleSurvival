@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
+using AutoShGame.Base.MonoSingleton;
 
 public class GameData : Singleton<GameData>
 {
@@ -15,10 +16,13 @@ public class GameData : Singleton<GameData>
 
     public void LoadUserData()
     {
-        if (File.Exists(filepath)) {
+        if (File.Exists(filepath)) 
+        {
             string fileContent = File.ReadAllText(filepath);
             userData = JsonUtility.FromJson<UserData>(fileContent);
-        } else {
+        } 
+        else 
+        {
             UserData data = new UserData();
             File.WriteAllText(filepath, JsonUtility.ToJson(data));
         }

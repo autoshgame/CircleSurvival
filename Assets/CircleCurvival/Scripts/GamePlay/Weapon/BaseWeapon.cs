@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class BaseWeapon : MonoBehaviour
 {
-    public abstract void DoRotate();
-
     public abstract void UpdateLevel();
+
+    public abstract void DoRotate();
 }

@@ -26,7 +26,9 @@ public class TriggerRotate : MonoBehaviour
                 // Level up player
                 actor.UpdateLevel();
             }
-        } else {
+        } 
+        else 
+        {
             //Play sound when sword hit
             audioSource.PlayOneShot(SoundManager.Instance.SoundSO.props[SoundUtils.SWORD_HIT]);
             

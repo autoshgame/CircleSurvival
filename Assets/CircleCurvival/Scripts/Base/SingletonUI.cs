@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-
+using AutoShGame.Base.MonoSingleton;
 public class SingletonUI: Singleton<SingletonUI>
 { 
     [SerializeField] private Canvas baseCanvas;
@@ -34,11 +34,7 @@ public class SingletonUI: Singleton<SingletonUI>
         {
             return availablePopups[popup];
         }
-
-        Debug.LogError("hey YOU, WATCH OUT");
-        Debug.LogError("VS CODE TON RAM VAI CA LON LUON AY");
-        Debug.LogError("DIT CON ME NHA NO NUA HAHAHA");
-
+        
         Debug.LogError("WARNING , POPUP " + popup.ToString() + " DONT EXSISTS");
         return null;
     }

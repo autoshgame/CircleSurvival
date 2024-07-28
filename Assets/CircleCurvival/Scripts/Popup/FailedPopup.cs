@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using System.Collections;
 using TMPro;
+using System;
 
 public class FailedPopup : BasePopup
 {
@@ -49,6 +50,9 @@ public class FailedPopup : BasePopup
     {
         GameSceneManager.Instance.LoadHome();
         Time.timeScale = 1;
+        
+        data.action?.Invoke();
+
         rect.DOAnchorPos3D(startPos, 0.8f).SetUpdate(true);
     }
 
@@ -77,9 +81,12 @@ public class LosePopupData
     public bool canReceiveCoin;
     public int coinReceived;
 
-    public LosePopupData(bool canReceiveCoin, int coinReceived)
+    public Action action;
+
+    public LosePopupData(bool canReceiveCoin, int coinReceived, Action action)
     {
         this.canReceiveCoin = canReceiveCoin;
         this.coinReceived = coinReceived;
+        this.action = action;
     }
 }

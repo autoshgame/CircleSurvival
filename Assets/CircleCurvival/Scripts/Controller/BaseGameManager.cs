@@ -1,5 +1,6 @@
-using UnityEngine;
-
+using System;
+using System.Diagnostics;
+using AutoShGame.Base.MonoSingleton;
 public class BaseGameManager : Singleton<BaseGameManager>
 {
     public int maxLevelReward;
@@ -33,11 +34,17 @@ public class BaseGameManager : Singleton<BaseGameManager>
         int coinReceived = 0;
         if (player.Level > maxLevelReward)
         {
+
             GameData.Instance.SetCoin(GameData.Instance.GetUserData().coin + player.Level * 3);
             canReceiveCoin = true;
             coinReceived = player.Level * 3;
         }
-        LosePopupData data = new LosePopupData(canReceiveCoin, coinReceived);
+
+        Action actionTest = () => {
+            UnityEngine.Debug.Log($"It is a beautiful day");
+        };
+
+        LosePopupData data = new LosePopupData(canReceiveCoin, coinReceived, actionTest);
         SingletonUI.Instance.Push(Popup.LosePopup).InitData(data).Show();
     }
 
@@ -49,7 +56,7 @@ public class BaseGameManager : Singleton<BaseGameManager>
         GameData.Instance.SetCoin(GameData.Instance.GetUserData().coin + player.Level * 3);
         WinPopupData data = new WinPopupData(player.Level * 3);
         SingletonUI.Instance.Push(Popup.WinPopup).InitData(data).Show();
-    }
+    }  
 }
 
 
