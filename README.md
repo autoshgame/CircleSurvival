@@ -1,13 +1,2 @@
 # CircleSurvival
-Dự án cá nhân (Base cho dự án Unity)
-
-Dự án circle survival được lấy ý tưởng từ creative trên instagram
-
-Dự án bao gồm đầy đủ các base được thiết kế cho 1 project hoàn chỉnh, bao gồm
-- Singleton sử dụng chủ yếu trong dự án
-- Các popup, menu, sound được đặt trong scriptableobject, sử dụng để config
-- Thiết kế đầy đủ các base cần dùng trong dự án (Lưu trữ - Âm Thanh, ..)
-- Dự án tiếp tục được thiết kế và phát triển (Thêm skin vũ khí + Thêm shop)
-- Reponsive UI trên các màn hình điện thoại khác nhau (Chiều ngang)
-
-Link sp : https://drive.google.com/file/d/1dJ46WZz7bPdouUE4Fd39CMxJiVjbT1gk/view?usp=sharing
+- Base cho unity. Dựa trên thời gian làm việc với unity, dự án sẽ được ngày càng bổ sung và phát triển. Đây cũng là các breakpoint của mình để hiểu hơn về các nguyên lý của software được áp dụng vào trong một công cụ lập trình và 1 framework cụ thể. Base sẽ được nâng cấp liên tục cùng với mindset phát triển của mình !=!
