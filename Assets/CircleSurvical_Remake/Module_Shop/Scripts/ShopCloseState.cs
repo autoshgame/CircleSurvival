@@ -37,7 +37,7 @@ public class ShopCloseState : FSMState
         }
 
         yield return new WaitForEndOfFrame();
-
+            
         dependency.component.manager.gameObject.SetActive(false);
     }
 }

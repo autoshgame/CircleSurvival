@@ -9,6 +9,8 @@ namespace CircleSurvival.Module.HomeMenu
 {
     public class HomeViewState : FSMState, IObservableAutoSh<HomeViewStateTopic>
     {
+        private HomeFSMDependency dependency;
+
         private void OnDestroy()
         {
             Observer.Instance?.RemoveObserver(this);
@@ -16,7 +18,7 @@ namespace CircleSurvival.Module.HomeMenu
 
         public override void OnSetupDependency<T>(T args)
         {
-            
+            dependency = args as HomeFSMDependency;
         }
 
         public override string GetState()
@@ -48,7 +50,8 @@ namespace CircleSurvival.Module.HomeMenu
                     Debug.Log("PLAY GAME");
                     break;
                 case HomeViewStateAction.OPEN_SHOP:
-                    Debug.Log("OPEN SHOP");
+                    dependency.component.shopComponent.manager.gameObject.SetActive(true);
+                    dependency.component.shopComponent.manager.ChangeState(ShopEvent.INIT);
                     break;
                 case HomeViewStateAction.EXIT_GAME:
                     Application.Quit();

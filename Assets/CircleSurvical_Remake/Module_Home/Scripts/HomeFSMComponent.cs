@@ -11,5 +11,7 @@ namespace CircleSurvival.Module.HomeMenu
         public Button buttonPlayGame;
         public Button buttonShop;
         public Button buttonExitGame;
+
+        public ShopFSMComponent shopComponent;
     }
 }

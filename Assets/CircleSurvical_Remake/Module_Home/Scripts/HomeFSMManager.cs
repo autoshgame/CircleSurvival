@@ -20,6 +20,7 @@ namespace CircleSurvival.Module.HomeMenu
             dicState.Add(homeInitState.GetState(), homeInitState);
 
             homeViewState = GetComponent<HomeViewState>();
+            homeViewState.OnSetupDependency(homeFSMDependency);
             dicState.Add(homeViewState.GetState(), homeViewState);
 
             ChangeState(HomeEvent.INIT);

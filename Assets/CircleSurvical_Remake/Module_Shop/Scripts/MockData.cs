@@ -7,7 +7,6 @@ public class MockData : MonoBehaviour, IObservableAutoSh<CurrencyDataTopic>, IOb
     CurrencyData currencyGroup = new CurrencyData();
     SkinData skinData = new SkinData();
 
-
     private void Awake()
     {
         currencyGroup.coin = 1000;
