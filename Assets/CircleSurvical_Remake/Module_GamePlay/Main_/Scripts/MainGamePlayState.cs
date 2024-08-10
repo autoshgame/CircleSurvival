@@ -2,7 +2,7 @@ using AutoShGame.Base.FSMState;
 using AutoShGame.Base.Observer;
 using UnityEngine;
 
-public class MainGamePlayState : FSMState, IObserver<PlayerDeadStateChannel>
+public class MainGamePlayState : FSMState, IObservableAutoSh<PlayerDeadStateChannel>
 {
     public override string GetState()
     {

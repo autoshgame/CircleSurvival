@@ -21,6 +21,7 @@ public class MainGameInitState : FSMState
         //Init data player
 
         dependency.component.botTest.OnRequestTargerTransform(dependency.component.playerFSMComponent.playerRigidbody2D.transform);
+        dependency.component.botTest.OnRequestPlayerFSM(dependency.component.playerFSMComponent);
         dependency.component.botTest.Init();
 
         dependency.component.mainCamFollowPlayer.TargetFollow = dependency.component.playerFSMComponent.playerRigidbody2D.transform;

@@ -54,7 +54,7 @@ namespace AutoShGame.Base.MonoSingleton
         #endregion
 
         #region  Methods
-        private void Awake()
+        protected virtual void Awake()
         {
             if (_persistent)
                 DontDestroyOnLoad(gameObject);

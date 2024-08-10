@@ -55,7 +55,10 @@ public class BotMovement : MonoBehaviour
             isMoveOpposite = false;
 
             botFSMComponent.enemyDetection.ScanPlayer();
+
             reverseDir = 1;
+
+            return;
         }
 
         direction.x *= reverseDir;

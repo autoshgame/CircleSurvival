@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BotFSMComponent : MonoBehaviour
@@ -10,4 +8,6 @@ public class BotFSMComponent : MonoBehaviour
     public BotFSMManager manager;
     public BotEnemyDetection enemyDetection;
     public BotMovement botMovement;
+    public BotStat botStat;
+    public BotOutSystemDetection botOutSystemDetection;
 }

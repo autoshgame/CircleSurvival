@@ -4,7 +4,7 @@ public class BotFSMManager : FSMManager
 {
     private FSMState botInitState;
     private FSMState botIdleState;
-    private FSMState botMovingState;
+    private FSMState botUpdateLevelState;
     private FSMState botDeadState;
     private FSMState botReviveState;
 
@@ -30,6 +30,10 @@ public class BotFSMManager : FSMManager
         botReviveState = GetComponent<BotReviveState>();
         botReviveState.OnSetupDependency(dependency);
         dicState.Add(botReviveState.GetState(), botReviveState);
+
+        botUpdateLevelState = GetComponent<BotUpdateLevelState>();
+        botUpdateLevelState.OnSetupDependency(dependency);
+        dicState.Add(botUpdateLevelState.GetState(), botUpdateLevelState);
 
         dependency.component = botFSMComponent;
     }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace AutoShGame.Base.Observer
 { 
-    public class MockListener : MonoBehaviour, IObserver<MockChannel>
+    public class MockListener : MonoBehaviour, IObservableAutoSh<MockChannel>
     {
         private void Awake()
         {

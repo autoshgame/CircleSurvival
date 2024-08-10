@@ -32,30 +32,30 @@ namespace CircleSurvival.Module.HomeMenu
 
         private void OnSetupListenerSettingsButton()
         {
-            HomeViewStateChannel homeViewStateChannel = new HomeViewStateChannel();
-            homeViewStateChannel.action = HomeViewStateAction.OPEN_SETTINGS;
-            Observer.Instance?.NotifyObservers(homeViewStateChannel);
+            HomeViewStateTopic homeViewStateTopic = new HomeViewStateTopic();
+            homeViewStateTopic.action = HomeViewStateAction.OPEN_SETTINGS;
+            Observer.Instance?.NotifyObservers(homeViewStateTopic);
         }
 
         private void OnSetupListenerPlayGameButton()
         {
-            HomeViewStateChannel homeViewStateChannel = new HomeViewStateChannel();
-            homeViewStateChannel.action = HomeViewStateAction.PLAY_GAME;
-            Observer.Instance?.NotifyObservers(homeViewStateChannel);
+            HomeViewStateTopic homeViewStateTopic = new HomeViewStateTopic();
+            homeViewStateTopic.action = HomeViewStateAction.PLAY_GAME;
+            Observer.Instance?.NotifyObservers(homeViewStateTopic);
         }
 
         private void OnSetupListenerOpenShopButton()
         {
-            HomeViewStateChannel homeViewStateChannel = new HomeViewStateChannel();
-            homeViewStateChannel.action = "OPEN_SHOP";
-            Observer.Instance?.NotifyObservers(homeViewStateChannel);
+            HomeViewStateTopic homeViewStateTopic = new HomeViewStateTopic();
+            homeViewStateTopic.action = "OPEN_SHOP";
+            Observer.Instance?.NotifyObservers(homeViewStateTopic);
         }
 
         private void OnSetupListenerExitGameButton()
         {
-            HomeViewStateChannel homeViewStateChannel = new HomeViewStateChannel();
-            homeViewStateChannel.action = "EXIT_GAME";
-            Observer.Instance?.NotifyObservers(homeViewStateChannel);
+            HomeViewStateTopic homeViewStateTopic = new HomeViewStateTopic();
+            homeViewStateTopic.action = "EXIT_GAME";
+            Observer.Instance?.NotifyObservers(homeViewStateTopic);
         }
     }
 }

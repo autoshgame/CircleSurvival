@@ -2,10 +2,12 @@ using AutoShGame.Base.FSMState;
 using AutoShGame.Base.Observer;
 using UnityEngine;
 using AutoShGame.Base.Popup;
+using UnityEngine.SceneManagement;
+
 
 namespace CircleSurvival.Module.HomeMenu
 {
-    public class HomeViewState : FSMState, IObserver<HomeViewStateChannel>
+    public class HomeViewState : FSMState, IObservableAutoSh<HomeViewStateTopic>
     {
         private void OnDestroy()
         {
@@ -32,7 +34,7 @@ namespace CircleSurvival.Module.HomeMenu
             Observer.Instance?.RemoveObserver(this);
         }
 
-        public void OnObserverNotify(HomeViewStateChannel data)
+        public void OnObserverNotify(HomeViewStateTopic data)
         {
             Debug.Log(data.action);
 
@@ -42,6 +44,7 @@ namespace CircleSurvival.Module.HomeMenu
                     Debug.Log("OPEN SETTINGS");
                     break;
                 case HomeViewStateAction.PLAY_GAME:
+                    SceneManager.LoadScene("_MainGamePlay");
                     Debug.Log("PLAY GAME");
                     break;
                 case HomeViewStateAction.OPEN_SHOP:
@@ -54,7 +57,7 @@ namespace CircleSurvival.Module.HomeMenu
         }
     }
 
-    public class HomeViewStateChannel
+    public class HomeViewStateTopic
     {
         public string action;
     }

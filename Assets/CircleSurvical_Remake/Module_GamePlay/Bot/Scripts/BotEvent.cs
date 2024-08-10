@@ -9,4 +9,5 @@ public static class BotEvent
     public const string MOVING = "MOVING";
     public const string REVIVE = "REVIVE";
     public const string DEAD = "DEAD";
+    public const string UPGRADE = "UPDATE";
 }

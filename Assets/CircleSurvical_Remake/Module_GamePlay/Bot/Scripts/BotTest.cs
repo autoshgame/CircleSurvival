@@ -3,19 +3,19 @@ using UnityEngine;
 using AutoShGame.Base.Observer;
 using System.Collections;
 
-public class BotTest : MonoBehaviour, IObserver<BotDeadStateChannel>, IObserver<BotReviveStateChannel>
+public class BotTest : MonoBehaviour, IObservableAutoSh<BotDeadStateChannel>, IObservableAutoSh<BotReviveStateChannel>
 {
-    [SerializeField] private List<Transform> bots;
-
-    [SerializeField] private List<BotFSMManager> botFSMManager;
+    private List<Transform> bots = new List<Transform>();
+    private HashSet<Vector3> alreadySpawnPos = new HashSet<Vector3>();
 
     private List<BotFSMManager> listBotAlive = new List<BotFSMManager>();
     private List<BotFSMManager> listBotDead = new List<BotFSMManager>();
 
-    [SerializeField] private HashSet<Vector3> alreadySpawnPos = new HashSet<Vector3>();
+    [SerializeField] private List<BotFSMManager> botFSMManager;
     [SerializeField] private List<SwordEnum> randomSword;
 
-    [SerializeField] private Transform targetSpawnTransform;
+    private Transform targetSpawnTransform;
+    private PlayerFSMComponent playerFSMComponent;
 
     int randomIndex = 0;
     int randomLevelSpawn = 0;
@@ -60,7 +60,7 @@ public class BotTest : MonoBehaviour, IObserver<BotDeadStateChannel>, IObserver<
 
     public void StartSpawnBot()
     {
-        StartCoroutine(SpawnBot(8f));
+        StartCoroutine(SpawnBot(3f));
     }
 
     private IEnumerator SpawnBot(float delay)
@@ -87,15 +87,19 @@ public class BotTest : MonoBehaviour, IObserver<BotDeadStateChannel>, IObserver<
                         botManager.transform.localScale = Vector3.zero;
 
                         BotReviveStateData botReviveStateData = new BotReviveStateData();
-                        botReviveStateData.levelRevive = 1;
+                        botReviveStateData.levelRevive = Random.Range(playerFSMComponent.stat.level, playerFSMComponent.stat.level + 2);
                         botReviveStateData.swordSkin = SwordEnum.SWORD_1;
+
+                        Debug.Log(targetSpawnTransform.position);
 
                         float yMax = targetSpawnTransform.position.y + 9;
                         float yMin = targetSpawnTransform.position.y - 9;
                         xMaxPositive = targetSpawnTransform.position.x + 15;
                         xMinPositive = targetSpawnTransform.position.x + 8;
-                        xMaxNegative = targetSpawnTransform.transform.position.x - 8;
-                        xMinNegative = targetSpawnTransform.transform.position.x - 15;
+                        xMaxNegative = targetSpawnTransform.position.x - 8;
+                        xMinNegative = targetSpawnTransform.position.x - 15;
+
+                        Debug.Log($"xMaxPositive {xMaxPositive} xMinPositive {xMinPositive} yMax {yMax} yMin {yMin}");
 
                         int option = Random.Range(0, 2);
                         xSpawn = option == 1 ? Random.Range(xMinNegative, xMaxNegative) : Random.Range(xMinPositive, xMaxPositive);
@@ -127,8 +131,20 @@ public class BotTest : MonoBehaviour, IObserver<BotDeadStateChannel>, IObserver<
         this.targetSpawnTransform = target;
     }
 
+    public void OnRequestPlayerFSM(PlayerFSMComponent target)
+    {
+        playerFSMComponent = target;
+    }
+
     public void Init()
     {
+        for (int i = 0; i < botFSMManager.Count; ++i)
+        {
+            var component = botFSMManager[i].GetComponent<BotFSMComponent>();
+
+            bots.Add(component.botRigidbody2D.transform);
+        }
+
         for (int i = 0; i < botFSMManager.Count; ++i)
         {
             var component = botFSMManager[i].GetComponent<BotFSMComponent>();

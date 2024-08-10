@@ -10,8 +10,10 @@ namespace AutoShGame.Base.Popup
         private IPopupSource _IPopupSource;
         private readonly Dictionary<string, BasePopup> popups = new Dictionary<string, BasePopup>();
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+
             _IPopupSource = GetComponent<IPopupSource>();
 
             if (_IPopupSource == null)

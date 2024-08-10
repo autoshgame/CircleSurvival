@@ -14,23 +14,23 @@ namespace AutoShGame.Base.Observer
     {
         private Dictionary<Type, object> observers = new Dictionary<Type, object>();
 
-        public void RegisterObserver<T>(IObserver<T> observer)
+        public void RegisterObserver<T>(IObservableAutoSh<T> observer)
         {
             Type key = typeof(T);
             if (!observers.ContainsKey(key))
             {
-                observers[key] = new List<IObserver<T>>();
+                observers[key] = new List<IObservableAutoSh<T>>();
             }
 
-            ((List<IObserver<T>>)observers[key]).Add(observer);
+            ((List<IObservableAutoSh<T>>)observers[key]).Add(observer);
         }
 
-        public void RemoveObserver<T>(IObserver<T> observer)
+        public void RemoveObserver<T>(IObservableAutoSh<T> observer)
         {
             Type key = typeof(T);
             if (observers.ContainsKey(key))
             {
-                ((List<IObserver<T>>)observers[key]).Remove(observer);
+                ((List<IObservableAutoSh<T>>)observers[key]).Remove(observer);
             }
         }
 
@@ -39,12 +39,19 @@ namespace AutoShGame.Base.Observer
             Type key = typeof(T);
             if (observers.ContainsKey(key))
             {
-                foreach (var observer in (List<IObserver<T>>)observers[key])
+                // Create a snapshot of the current observers to avoid modification during enumeration
+                var currentObservers = new List<IObservableAutoSh<T>>(((List<IObservableAutoSh<T>>)observers[key]));
+
+                foreach (var observer in currentObservers)
                 {
                     observer.OnObserverNotify(data);
                 }
             }
         }
     }
-}
 
+    public interface IObservableAutoSh<T>
+    {
+        void OnObserverNotify(T data);
+    }
+}

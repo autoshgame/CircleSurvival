@@ -33,10 +33,15 @@ public class BotReviveState : FSMState
 
             dependency.component.manager.transform.localScale = Vector3.zero;
 
+            dependency.component.botStat.level = botReviveStateData.levelRevive;
+
             dependency.component.botRigidbody2D.gameObject.SetActive(true);
             dependency.component.weapon.gameObject.SetActive(true);
-            dependency.component.weapon.SetLevel(botReviveStateData.levelRevive);
+            dependency.component.weapon.SetLevel(dependency.component.botStat.level);
             dependency.component.weapon.SetStatus(true);
+            dependency.component.txtLevel.text = dependency.component.botStat.level.ToString();
+
+
             dependency.component.botRigidbody2D.gameObject.transform.position = botReviveStateData.positionSpawn;
             dependency.component.weapon.transform.position = dependency.component.botRigidbody2D.gameObject.transform.position;
 

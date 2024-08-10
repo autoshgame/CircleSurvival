@@ -503,6 +503,8 @@ GameObject:
   - component: {fileID: 6451160467400145392}
   - component: {fileID: 6451160467400145396}
   - component: {fileID: 6451160467400145398}
+  - component: {fileID: 2047801159}
+  - component: {fileID: 7459192541898871836}
   m_Layer: 0
   m_Name: 'BotPrefabs '
   m_TagString: Untagged
@@ -544,6 +546,8 @@ MonoBehaviour:
   manager: {fileID: 6451160467400145394}
   enemyDetection: {fileID: 6451160467381973689}
   botMovement: {fileID: 6451160467381973690}
+  botStat: {fileID: 2047801159}
+  botOutSystemDetection: {fileID: 6451160467381973687}
 --- !u!114 &6451160467400145394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -614,5 +618,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1827f4ad828ffc4e9dc8b3a0dcb7072, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2047801159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6451160467400145358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b538b43cd7750749985f7e139580c69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  botFSMComponent: {fileID: 6451160467400145395}
+  level: 0
+--- !u!114 &7459192541898871836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6451160467400145358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2636c01b2511411448cd53390c7c1421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

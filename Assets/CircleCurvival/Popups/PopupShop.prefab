@@ -701,6 +701,7 @@ MonoBehaviour:
   closeButton: {fileID: 8600582147275897863}
   itemSelected: {fileID: 0}
   coins: {fileID: 7401875321267642199}
+  audioSource: {fileID: 0}
 --- !u!1 &6967138520205144852
 GameObject:
   m_ObjectHideFlags: 0
@@ -865,3 +866,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   btn: {fileID: 8600582147275897863}
+  screenInfo: 0

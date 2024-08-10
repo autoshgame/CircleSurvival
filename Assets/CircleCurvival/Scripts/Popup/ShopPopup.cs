@@ -57,8 +57,13 @@ public class ShopPopup : BasePopup
         foreach (KeyValuePair<SwordEnum, SwordProps> entry in swordSkinSO.props)
         {
             GameObject item = Instantiate(shopItemUI.gameObject, listShopSkinRect.transform);
+
+            //cached
             bool ownSkin = GameData.Instance.GetUserData().availableSword.Contains(entry.Key);
+            
+            //cached
             bool isSelected = GameData.Instance.GetUserData().currentSword == entry.Key;
+
             ShopItemUI itemUI = item.GetComponent<ShopItemUI>();
             itemUI.Init(entry.Key, entry.Value.coin.ToString(), entry.Value.image, ownSkin, isSelected);
 

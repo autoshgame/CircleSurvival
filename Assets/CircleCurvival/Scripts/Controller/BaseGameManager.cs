@@ -8,8 +8,9 @@ public class BaseGameManager : Singleton<BaseGameManager>
     public GameState gameState;
     public Human player;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         gameState = GameState.Playing;
     }
 

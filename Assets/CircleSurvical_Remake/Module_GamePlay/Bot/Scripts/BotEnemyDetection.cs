@@ -5,6 +5,7 @@ public class BotEnemyDetection : MonoBehaviour
 {
     private Transform player;
     private List<Transform> listCurBot;
+    int foundIndex = 0;
 
     private Transform target;
     public Transform Target { get => target; }
@@ -16,11 +17,10 @@ public class BotEnemyDetection : MonoBehaviour
         if (listCurBot.Count == 0) return;
 
         float distance = 10000000;
-        int foundIndex = 0;
 
         for (int i = 0; i < listCurBot.Count; ++i)
         {
-            if (listCurBot[i].gameObject.GetInstanceID() != this.gameObject.GetInstanceID() && this.gameObject.activeInHierarchy)
+            if (listCurBot[i].gameObject.GetInstanceID() != this.gameObject.GetInstanceID() && listCurBot[i].gameObject.activeInHierarchy)
             {
                 float currentDistance = Vector2.Distance(this.transform.position, listCurBot[i].position);
                 if (currentDistance <= distance)
@@ -38,13 +38,16 @@ public class BotEnemyDetection : MonoBehaviour
             distancePlayer = Vector2.Distance(this.transform.position, player.position);
         } 
 
-        if (distancePlayer <= distance && player != null && player.gameObject.activeInHierarchy)
+        if (distancePlayer <= distance + 50 && player != null && player.gameObject.activeInHierarchy)
         {
             target = player;
         }
         else
         {
-            target = listCurBot[foundIndex];
+            if (listCurBot[foundIndex].gameObject.activeInHierarchy)
+            {
+                target = listCurBot[foundIndex];
+            }
         }
     }
 
