@@ -19,7 +19,6 @@ public class ShopViewState : FSMState, IObservableAutoSh<ShopViewStateTopic>
     public override void OnEnter()
     {
         Observer.Instance?.RegisterObserver(this);
-        Debug.Log(dependency.component.currency.coin);
     }
 
     public override void OnExit()

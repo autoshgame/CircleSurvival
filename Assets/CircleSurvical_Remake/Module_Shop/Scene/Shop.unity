@@ -731,8 +731,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 50935.688}
-  m_SizeDelta: {x: 0.00024414, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &513766917
 MonoBehaviour:
@@ -1243,13 +1243,14 @@ GameObject:
   - component: {fileID: 1596403563}
   - component: {fileID: 1596403564}
   - component: {fileID: 1596403565}
+  - component: {fileID: 1596403566}
   m_Layer: 5
   m_Name: Shop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1596403559
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1350,6 +1351,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85db3332b4d1ac642b002d16778c1489, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1596403566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596403558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b7d0b65d964a8d44ae9e578e53344bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1665880791
@@ -1575,6 +1588,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1961433589}
   - component: {fileID: 1961433588}
+  - component: {fileID: 1961433590}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -1608,6 +1622,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1961433590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961433587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 109d0b5be7bcc2c47b0728e5dc35f9d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopBtn: {fileID: 336980049}
+  component: {fileID: 1596403561}
 --- !u!1 &2081585035
 GameObject:
   m_ObjectHideFlags: 0

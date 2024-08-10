@@ -36,6 +36,8 @@ public class ShopCloseState : FSMState
             Destroy(dependency.component.shopItemList.transform.GetChild(i).gameObject);
         }
 
+        yield return new WaitForEndOfFrame();
+
         dependency.component.manager.gameObject.SetActive(false);
     }
 }
