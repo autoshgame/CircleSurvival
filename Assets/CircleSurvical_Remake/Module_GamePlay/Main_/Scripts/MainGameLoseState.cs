@@ -1,7 +1,10 @@
 using AutoShGame.Base.FSMState;
 using UnityEngine;
+using AutoShGame.Base.Modal;
+using AutoShGame.Base.Observer;
+using UnityEngine.SceneManagement;
 
-public class MainGameLoseState : FSMState
+public class MainGameLoseState : FSMState, IObservableAutoSh<LoseModalActionTopic>
 {
     private MainGameFSMDependency dependency;
 
@@ -17,10 +20,28 @@ public class MainGameLoseState : FSMState
 
     public override void OnEnter()
     {
-        //Show component revive
+        Observer.Instance.RegisterObserver(this);
 
         dependency.component.playerFSMComponent.manager.gameObject.SetActive(false);
-
-        Time.timeScale = 0;
+        ModalManager.Instance.Push<LoseModal>().Show();
     }
+
+    public override void OnExit()
+    {
+        Observer.Instance?.RemoveObserver(this);
+    }
+
+    private void OnDestroy()
+    {
+        Observer.Instance?.RemoveObserver(this);
+    }
+
+    public void OnObserverNotify(LoseModalActionTopic data)
+    {
+        if (data.actionLoseModal == ActionLoseModal.CLOSE)
+        {
+            SceneManager.LoadScene("Home");
+        }
+    }
+
 }

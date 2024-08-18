@@ -27,7 +27,6 @@ namespace AutoShGame.Base.Modal
         /// <summary>
         /// Push a modal. The modal need a canvas
         /// </summary>
-        /// <param name="popupName"></param>
         /// <param name="shouldCache"></param>
         /// <returns></returns>
         public BaseModal Push<T>(bool shouldCache = false)
@@ -37,7 +36,6 @@ namespace AutoShGame.Base.Modal
             {
                 if (modals[type] != null)
                 {
-                    modals[type].Show();
                     return modals[type];
                 }
                 else 
@@ -57,9 +55,8 @@ namespace AutoShGame.Base.Modal
         }
 
         /// <summary>
-        /// Get a popup by its name (If it is cached)
+        /// Get a modal(If it is cached).The result will be null if the modal is not cached
         /// </summary>
-        /// <param name="popupName"></param>
         /// <returns></returns>
         public BaseModal Get<T>()
         {
