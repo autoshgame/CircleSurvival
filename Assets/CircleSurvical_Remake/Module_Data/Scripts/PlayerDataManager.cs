@@ -21,9 +21,6 @@ public class PlayerDataManager : Singleton<PlayerDataManager>,
 
         filepath = $"{Application.persistentDataPath}/user.json";
         LoadUserData();
-        currencyGroup.coin = userData.currency.coin;
-        skinData.ownedSwords = userData.weapon.availableSword;
-        skinData.choosenSword = userData.weapon.currentSword;
     }
 
     private void OnEnable()
@@ -40,6 +37,8 @@ public class PlayerDataManager : Singleton<PlayerDataManager>,
 
     public void OnObserverNotify(CurrencyDataTopic data)
     {
+        LoadUserData();
+
         if (data.actionType == ActionType.GET)
         {
             currencyGroup.coin = userData.currency.coin;
@@ -49,12 +48,15 @@ public class PlayerDataManager : Singleton<PlayerDataManager>,
         else if (data.actionType == ActionType.UPDATE)
         {
             userData.currency.coin = data.updateData.coin;
+            SaveUserData();
             data.onLoadSuccess?.Invoke(true);
         }
     }
 
     public void OnObserverNotify(SkinDataTopic data)
     {
+        LoadUserData();
+
         if (data.actionType == ActionType.GET)
         {
             skinData.choosenSword = userData.weapon.currentSword;
@@ -71,7 +73,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>,
         }
     }
 
-    public void LoadUserData()
+    private void LoadUserData()
     {
         if (File.Exists(filepath))
         {
@@ -85,9 +87,17 @@ public class PlayerDataManager : Singleton<PlayerDataManager>,
         }
     }
 
-    public void SaveUserData()
+    private void SaveUserData()
     {
         File.WriteAllText(filepath, JsonUtility.ToJson(userData));
+    }
+
+    public void ResetUserData()
+    {
+        if (File.Exists(filepath))
+        {
+            File.Delete(filepath);
+        }
     }
 }
 
@@ -101,7 +111,7 @@ public class PlayerData
     {
         currency = new Currency
         {
-            coin = 5
+            coin = 1000
         };
 
         weapon = new Weapon

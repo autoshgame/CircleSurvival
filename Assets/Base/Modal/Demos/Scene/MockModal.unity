@@ -359,12 +359,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1032368103}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c08e51cf22b5ae7458d82199b4597716, type: 3}
+  m_Script: {fileID: 11500000, guid: 691724b878870ac4bbe320e5e1300f42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupSource:
-  - popupName: Hello
-    popupPrefab: {fileID: 6409072225171637643, guid: 631a344193759854084aa28ec876de4c, type: 3}
+  listModals:
+  - {fileID: 2694640268874713907, guid: 631a344193759854084aa28ec876de4c, type: 3}
+  - {fileID: -183705968227760070, guid: 9a241aad9e5f41b44b70d6739bad8e9d, type: 3}
 --- !u!1 &1659375277
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,7 +457,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1753615120}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58c804a604d75a5468a7f6395809f8fb, type: 3}
+  m_Script: {fileID: 11500000, guid: 020a46ba5f17dd54f8ad62c0aa15ef24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1753615122

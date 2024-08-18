@@ -1,5 +1,4 @@
 using UnityEngine;
-using AutoShGame.Base.Popup;
 using AutoShGame.Base.FSMState;
 
 public class ShopFSMManager : FSMManager

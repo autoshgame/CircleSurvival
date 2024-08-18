@@ -1,7 +1,6 @@
 using AutoShGame.Base.FSMState;
 using AutoShGame.Base.Observer;
 using UnityEngine;
-using AutoShGame.Base.Popup;
 using UnityEngine.SceneManagement;
 
 

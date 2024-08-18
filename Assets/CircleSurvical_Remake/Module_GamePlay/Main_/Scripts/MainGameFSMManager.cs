@@ -5,6 +5,8 @@ public class MainGameFSMManager : FSMManager
 {
     private FSMState mainGameInitState;
     private FSMState mainGamePlayState;
+    private FSMState mainGameWinState;
+    private FSMState mainGameLoseState;
 
     protected override void Awake()
     {
@@ -18,7 +20,16 @@ public class MainGameFSMManager : FSMManager
         dicState.Add(mainGameInitState.GetState(), mainGameInitState);
 
         mainGamePlayState = GetComponent<MainGamePlayState>();
+        mainGamePlayState.OnSetupDependency(dependency);
         dicState.Add(mainGamePlayState.GetState(), mainGamePlayState);
+
+        mainGameWinState = GetComponent<MainGameWinState>();
+        mainGameWinState.OnSetupDependency(dependency);
+        dicState.Add(mainGameWinState.GetState(), mainGameWinState);
+
+        mainGameLoseState = GetComponent<MainGameLoseState>();
+        mainGameLoseState.OnSetupDependency(dependency);
+        dicState.Add(mainGameLoseState.GetState(), mainGameLoseState);
     }
 
     private void Start()

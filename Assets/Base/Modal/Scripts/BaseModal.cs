@@ -1,10 +1,11 @@
 using UnityEngine;
 
-namespace AutoShGame.Base.Popup 
+namespace AutoShGame.Base.Modal 
 {
-    public class BasePopup : MonoBehaviour
+    public class BaseModal : MonoBehaviour
     {        
-        public virtual BasePopup InitData<T>(T args) 
+
+        public virtual BaseModal InitData<T>(T args) 
         {
             return this;
         }

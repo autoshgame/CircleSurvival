@@ -23,8 +23,8 @@ public class PlayerStat : MonoBehaviour
         level++;
         playerFSMComponent.manager.ChangeState(PlayerState.UPGRADE);
 
-        PlayerUpdateLevelChannel playerUpdateLevelChannel = new PlayerUpdateLevelChannel();
-        playerUpdateLevelChannel.level = level;
-        Observer.Instance?.NotifyObservers(playerUpdateLevelChannel);
+        PlayerUpdateLevelTopic playerUpdateLevelTopic = new PlayerUpdateLevelTopic();
+        playerUpdateLevelTopic.level = level;
+        Observer.Instance?.NotifyObservers(playerUpdateLevelTopic);
     }
 }

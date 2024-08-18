@@ -24,12 +24,12 @@ public class PlayerDeadState : FSMState
         dependency.component.playerRigidbody2D.gameObject.SetActive(false);
         dependency.component.weapon.gameObject.SetActive(false);
 
-        PlayerDeadStateChannel playerDeadStateChannel = new PlayerDeadStateChannel();
-        Observer.Instance.NotifyObservers(playerDeadStateChannel);
+        PlayerDeadStateTopic playerDeadStateTopic = new PlayerDeadStateTopic();
+        Observer.Instance.NotifyObservers(playerDeadStateTopic);
     }
 }
 
-public class PlayerDeadStateChannel
+public class PlayerDeadStateTopic
 {
     public string name;
 }

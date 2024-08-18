@@ -38,7 +38,7 @@ public class BotEnemyDetection : MonoBehaviour
             distancePlayer = Vector2.Distance(this.transform.position, player.position);
         } 
 
-        if (distancePlayer <= distance + 50 && player != null && player.gameObject.activeInHierarchy)
+        if (distancePlayer <= distance + 2 && player != null && player.gameObject.activeInHierarchy)
         {
             target = player;
         }

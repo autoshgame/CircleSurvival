@@ -27,7 +27,7 @@ public class PlayerUpdateLevelState : FSMState
     }
 }
 
-public class PlayerUpdateLevelChannel
+public class PlayerUpdateLevelTopic
 {
     public int level;
 }

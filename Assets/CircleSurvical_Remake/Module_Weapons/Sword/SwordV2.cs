@@ -18,6 +18,14 @@ public class SwordV2 : BaseWeaponV2, ICollidable
 
     private IWeaponNotify notify;
 
+    private void Update()
+    {
+        if (followObject != null)
+        {
+            transform.position = followObject.position;
+        }
+    }
+
     public override void Init<T>(T args)
     {
         swordV2Data = args as SwordV2Data;
@@ -32,14 +40,6 @@ public class SwordV2 : BaseWeaponV2, ICollidable
         rotateV2.SetRotationSpeed(swordSO.props[swordV2Data.currentLevel].rotateSpeed);
         transform.localScale = swordSO.props[swordV2Data.currentLevel].scale;
         rotateV2.SetRotateStatus(true);
-    }
-
-    private void Update()
-    {
-        if (followObject != null)
-        {
-            transform.position = followObject.position;
-        }
     }
 
     public override void SetLevel(int level)
