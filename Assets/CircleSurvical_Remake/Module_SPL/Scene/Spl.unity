@@ -182,6 +182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listModals:
   - {fileID: 2701290171005208806, guid: 829884b34851d6c45924216837aa7f35, type: 3}
+  - {fileID: 4146171500687109774, guid: 95a7b57bcb577bf4e8f6bab82cb8895c, type: 3}
 --- !u!1 &83812742
 GameObject:
   m_ObjectHideFlags: 0

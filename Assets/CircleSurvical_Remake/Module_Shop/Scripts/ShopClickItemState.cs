@@ -34,8 +34,9 @@ public class ShopClickItemState : FSMState
         else if (itemClick.itemState == ShopItemState.OWNED && itemClick.itemState != ShopItemState.SELECTED)
         {
             //Set selected for component
-            OnReselectedComponent();
-            dependency.component.manager.ChangeState(ShopEvent.VIEW);
+            dependency.component.skinData.choosenSword = itemClick.skin;
+
+            StartCoroutine(UpdateSelectedSkin());
         }
         else
         {
@@ -71,6 +72,21 @@ public class ShopClickItemState : FSMState
         yield return new WaitUntil(() => (isUpdateCurrencyDataSuccess && isUpdateSkinDataSuccess));
 
         dependency.component.txtShopAmountCoin.text = dependency.component.currency.coin.ToString();
+
+        OnReselectedComponent();
+    }
+
+    IEnumerator UpdateSelectedSkin()
+    {
+        isUpdateSkinDataSuccess = false;
+
+        SkinDataTopic skinDataTopic = new SkinDataTopic();
+        skinDataTopic.actionType = ActionType.UPDATE;
+        skinDataTopic.updateData = dependency.component.skinData;
+        skinDataTopic.onLoadSuccess = (value) => isUpdateSkinDataSuccess = value;
+        Observer.Instance.NotifyObservers(skinDataTopic);
+
+        yield return new WaitUntil(() => (isUpdateSkinDataSuccess));
 
         OnReselectedComponent();
     }

@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using AutoShGame.Base.MonoSingleton;
-using System;
 
 namespace AutoShGame.Base.Modal 
 {

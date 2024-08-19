@@ -854,7 +854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0d6d9704d8eb9040bafb87330a77657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerWinLevel: 14
+  playerWinLevel: 2
 --- !u!4 &1229551407
 Transform:
   m_ObjectHideFlags: 0

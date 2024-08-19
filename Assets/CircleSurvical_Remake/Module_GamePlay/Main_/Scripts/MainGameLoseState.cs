@@ -4,7 +4,7 @@ using AutoShGame.Base.Modal;
 using AutoShGame.Base.Observer;
 using UnityEngine.SceneManagement;
 
-public class MainGameLoseState : FSMState, IObservableAutoSh<LoseModalActionTopic>
+public class MainGameLoseState : FSMState
 {
     private MainGameFSMDependency dependency;
 
@@ -20,28 +20,14 @@ public class MainGameLoseState : FSMState, IObservableAutoSh<LoseModalActionTopi
 
     public override void OnEnter()
     {
-        Observer.Instance.RegisterObserver(this);
-
         dependency.component.playerFSMComponent.manager.gameObject.SetActive(false);
-        ModalManager.Instance.Push<LoseModal>().Show();
+        LoseModalData loseModalData = new LoseModalData();
+        loseModalData.actionClickExit = ActionClickEndGame;
+        ModalManager.Instance.Push<LoseModal>().InitData(loseModalData).Show();
     }
 
-    public override void OnExit()
+    public void ActionClickEndGame()
     {
-        Observer.Instance?.RemoveObserver(this);
+        SceneManager.LoadScene("Home");
     }
-
-    private void OnDestroy()
-    {
-        Observer.Instance?.RemoveObserver(this);
-    }
-
-    public void OnObserverNotify(LoseModalActionTopic data)
-    {
-        if (data.actionLoseModal == ActionLoseModal.CLOSE)
-        {
-            SceneManager.LoadScene("Home");
-        }
-    }
-
 }

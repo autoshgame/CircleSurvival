@@ -3,15 +3,24 @@ using UnityEngine;
 using UnityEngine.UI;
 using AutoShGame.Base.Observer;
 using DG.Tweening;
+using System;
 
 public class LoseModal : BaseModal
 {
     [SerializeField] private Button btnExit;
     [SerializeField] private RectTransform content;
 
+    private LoseModalData loseModalData;
+
     private void Start()
     {
         btnExit.onClick.AddListener(Exit);
+    }
+
+    public override BaseModal InitData<T>(T args)
+    {
+        loseModalData = args as LoseModalData;
+        return base.InitData(args);
     }
 
     public override void Show()
@@ -21,19 +30,13 @@ public class LoseModal : BaseModal
 
     private void Exit()
     {
-        LoseModalActionTopic loseModalActionTopic = new LoseModalActionTopic();
-        loseModalActionTopic.actionLoseModal = ActionLoseModal.CLOSE;
-        Observer.Instance.NotifyObservers(loseModalActionTopic);
+        loseModalData.actionClickExit?.Invoke();
+        Destroy(this.gameObject);
     }
 }
 
-//Action
-public class LoseModalActionTopic
+public class LoseModalData
 {
-    public ActionLoseModal actionLoseModal;
+    public Action actionClickExit;
 }
 
-public enum ActionLoseModal
-{
-    CLOSE
-}
