@@ -19,99 +19,93 @@ namespace AutoShGame.Base.Sound
     /// </summary>
     public class SoundManager : Singleton<SoundManager>
     {
-        private readonly Dictionary<int, AudioSource> fxAudioSource = new Dictionary<int, AudioSource>();
-        private readonly Dictionary<int, AudioSource> backGroundAudioSource = new Dictionary<int, AudioSource>();
 
+        private List<AudioSource> currentPlayAudioSource = new List<AudioSource>();
+        private List<AudioSource> donePlayAudioSource = new List<AudioSource>();
 
-        public AudioSource PlayFx(AudioClip audio, Transform parent = null, Action onDone = null) 
+        private SourceSoundInfoTypeResolver typeResolver = new SourceSoundInfoTypeResolver();
+        private SourceConfigResolver configResolver = new SourceConfigResolver();
+
+        public ISourceSoundInfo Play(AudioClip audio, SourceConfigType sourceConfigType, bool loop = false, Transform parent = null) 
         {
-            GameObject go = new GameObject();
-            go.name = audio.name;
-            AudioSource audioSource = go.AddComponent<AudioSource>();
-            fxAudioSource.Add(audioSource.GetInstanceID(), audioSource);
-            StartCoroutine(IPlayFx(audioSource, audio, parent, onDone));
-            return audioSource;
-        }
+            ISourceSoundInfo iSourceSoundInfo = null;
+            AudioSource audioSource = null;
 
-        private IEnumerator IPlayFx(AudioSource audioSource, AudioClip audio, Transform parent = null, Action onDone = null) 
-        {
-            audioSource.PlayOneShot(audio);
+            Type T = typeResolver.ResolveType();
 
-            if (parent != null) 
+            if (donePlayAudioSource.Count > 0)
             {
-                audioSource.transform.parent = parent;
+                audioSource = donePlayAudioSource[donePlayAudioSource.Count - 1];
+                donePlayAudioSource.RemoveAt(donePlayAudioSource.Count - 1);
+                AddPlayAudioSource(audioSource, audio, loop, audio.name, sourceConfigType);
+                iSourceSoundInfo = audioSource.GetComponent(T) as ISourceSoundInfo;
             }
-
-            yield return new WaitForSeconds(audio.length);
-
-            fxAudioSource.Remove(audioSource.GetInstanceID());
-
-            if (audioSource != null) 
-            {              
-                Destroy(audioSource.gameObject);        
-                onDone?.Invoke();            
-            }
-        }
-
-        public void StopAllFX() 
-        {
-            foreach (KeyValuePair<int, AudioSource> item in fxAudioSource) 
+            else
             {
-                item.Value.Stop();
-                Destroy(item.Value.gameObject);       
+                GameObject source = new GameObject();
+                audioSource = source.AddComponent<AudioSource>();
+                AddPlayAudioSource(audioSource, audio, loop, audio.name, sourceConfigType);
+                iSourceSoundInfo = source.AddComponent<AudioSourceImpl>() as ISourceSoundInfo;
             }
 
-            fxAudioSource.Clear();
+            if (parent != null) audioSource.transform.parent = parent;
+            StartCoroutine(IEPlay(audio.length, audioSource, true));
+            return iSourceSoundInfo;
         }
 
-        public void PlayBySource(AudioClip audio, Transform parent = null) 
+        public void Play(AudioClip audio, bool loop = false, Transform parent = null)
         {
-            GameObject go = new GameObject();
-            go.name = audio.name;
-            AudioSource audioSource = go.AddComponent<AudioSource>();
-            audioSource.loop = true;
-            audioSource.clip = audio;
-            backGroundAudioSource.Add(audioSource.GetInstanceID(), audioSource);
-            StartCoroutine(IPlayBySource(audioSource, audio, parent));      
-        }
-    
-        public IEnumerator IPlayBySource(AudioSource audioSource, AudioClip audio, Transform parent = null) 
-        {
-            if (parent != null)
+            AudioSource audioSource = null;
+
+            if (donePlayAudioSource.Count > 0)
             {
-                audioSource.transform.parent = parent;
+                audioSource = donePlayAudioSource[donePlayAudioSource.Count - 1];
+                donePlayAudioSource.RemoveAt(donePlayAudioSource.Count - 1);
+                AddPlayAudioSource(audioSource, audio, loop, audio.name);
+            }
+            else
+            {
+                GameObject source = new GameObject();
+                audioSource = source.AddComponent<AudioSource>();
+                AddPlayAudioSource(audioSource, audio, loop, audio.name);
             }
 
+            if (parent != null) audioSource.transform.parent = parent;
             audioSource.Play();
-            yield return null;
+            StartCoroutine(IEPlay(audio.length, audioSource, false));
         }
 
-        public void StopALLSourceSound() 
+        private IEnumerator IEPlay(float audioTime, AudioSource audioSource, bool isKeepSource)
         {
-            foreach (KeyValuePair<int, AudioSource> item in backGroundAudioSource) 
+            if (!isKeepSource)
             {
-                item.Value.Stop();
-                Destroy(item.Value.gameObject);       
+                yield return new WaitForSeconds(audioTime);
+                currentPlayAudioSource.Remove(audioSource);
+                donePlayAudioSource.Add(audioSource);
             }
-
-            backGroundAudioSource.Clear();
+            else
+            {
+                yield return null;
+            }
         }
 
-        public void Stop(int audioSourceID) 
+        private void AddPlayAudioSource(AudioSource audioSource, AudioClip clip, bool loop, string name, SourceConfigType sourceConfigType = SourceConfigType.TwoD)
         {
-            if (fxAudioSource.ContainsKey(audioSourceID)) 
-            {
-                fxAudioSource[audioSourceID].Stop();
-                fxAudioSource.Remove(audioSourceID);
-                DestroyImmediate(fxAudioSource[audioSourceID].gameObject);
-            }
+            //Apply config for audiosource
+            audioSource.clip = clip;
+            audioSource.loop = loop;
+            audioSource.gameObject.name = name;
+            
+            SourceConfigProps configProps = configResolver.GetSourceConfigs(sourceConfigType);
 
-            if (backGroundAudioSource.ContainsKey(audioSourceID)) 
-            {
-                backGroundAudioSource[audioSourceID].Stop();
-                backGroundAudioSource.Remove(audioSourceID);
-                DestroyImmediate(backGroundAudioSource[audioSourceID].gameObject);
-            }
+            audioSource.rolloffMode = configProps.rolloffMode;
+            audioSource.dopplerLevel = configProps.dopplerLevel;
+            audioSource.spread = configProps.spread;
+            audioSource.maxDistance = configProps.minDistance;
+            audioSource.maxDistance = configProps.maxDistance;
+            audioSource.spatialBlend = configProps.spatialBlend;
+
+            currentPlayAudioSource.Add(audioSource);
         }
     }
 }

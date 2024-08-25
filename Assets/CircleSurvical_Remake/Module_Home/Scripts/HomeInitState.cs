@@ -22,7 +22,7 @@ namespace CircleSurvival.Module.HomeMenu
 
         public override void OnEnter()
         {
-            AutoShGame.Base.Sound.SoundManager.Instance.PlayBySource(audioBackground);
+            //AutoShGame.Base.Sound.SoundManager.Instance.PlayBySource(audioBackground);
             dependency.component.buttonSettings.onClick.AddListener(OnSetupListenerSettingsButton);
             dependency.component.buttonPlayGame.onClick.AddListener(OnSetupListenerPlayGameButton);
             dependency.component.buttonShop.onClick.AddListener(OnSetupListenerOpenShopButton);

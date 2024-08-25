@@ -1,21 +1,57 @@
 using UnityEngine;
+using System.Collections;
 
-namespace AutoShGame.Base.Sound 
+namespace AutoShGame.Base.Sound
 {
     public class Mock : MonoBehaviour
     {
         [SerializeField] private AudioClip audioMock;
 
         // Start is called before the first frame update
-        void Start()
+        IEnumerator Start()
         {
-            AudioSource audio = SoundManager.Instance.PlayFx(audioMock, transform, OnDone);
-            SoundManager.Instance.Stop(audio.GetInstanceID());
-        }
+            //ISourceSoundInfo iSourceSOundInfo = SoundManager.Instance.Play(audioMock, sourceConfigType: SourceConfigType.TwoD, parent: this.transform);
+            //iSourceSOundInfo.Play();
+            SoundTopic soundTopic = null;
 
-        void OnDone()
-        {
-            Debug.Log("DONE AUDIO");
+            ISourceSoundInfo soundInfo = null;
+
+            soundTopic = new SoundTopic(audioMock, SourceConfigType.ThreeD, (value) => soundInfo = value, false);
+            Observer.Observer.Instance.NotifyObservers(soundTopic);
+            yield return new WaitUntil(() => soundInfo != null);
+            soundInfo.Play();
+
+            yield return new WaitForSeconds(1f);
+
+            soundTopic = new SoundTopic(audioMock);
+            Observer.Observer.Instance.NotifyObservers(soundTopic);
+            soundInfo.Play();
+
+
+            /*
+            yield return null;
+
+            yield return null;
+            //yield return new WaitForSeconds(2f);\
+
+            SoundManager.Instance.Play(audioMock);
+
+            //yield return new WaitForSeconds(2f);
+            SoundManager.Instance.Play(audioMock);
+            //yield return new WaitForSeconds(2f);
+            SoundManager.Instance.Play(audioMock);
+            yield return new WaitForSeconds(3f);
+
+            SoundManager.Instance.Play(audioMock);
+            yield return null;
+            //yield return new WaitForSeconds(2f);
+            SoundManager.Instance.Play(audioMock);
+            //yield return new WaitForSeconds(2f);
+            SoundManager.Instance.Play(audioMock);
+            //yield return new WaitForSeconds(2f);
+            SoundManager.Instance.Play(audioMock);
+            //yield return new WaitForSeconds(2f);
+            */
         }
     }
 }
