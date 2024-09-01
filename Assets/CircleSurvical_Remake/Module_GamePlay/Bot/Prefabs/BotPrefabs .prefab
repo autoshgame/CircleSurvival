@@ -272,6 +272,7 @@ MonoBehaviour:
   baseCollider: {fileID: 6451160467305761399}
   rotateV2: {fileID: 6451160467305761401}
   targetRotate: {fileID: 6451160467305761398}
+  hitAudio: {fileID: 8300000, guid: 9fda1aff1ed96d646ad0e26810e0911c, type: 3}
   swordSO: {fileID: 11400000, guid: 55ac094793f5b414e9cb515b5f0db701, type: 2}
   swordSkinSO: {fileID: 11400000, guid: 455eddfc47febbe4c9cc2db17b9916f6, type: 2}
 --- !u!114 &6451160467305761401

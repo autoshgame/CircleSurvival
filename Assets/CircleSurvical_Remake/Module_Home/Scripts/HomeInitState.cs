@@ -2,12 +2,11 @@ using AutoShGame.Base.FSMState;
 using UnityEngine;
 using AutoShGame.Base.Observer;
 
+
 namespace CircleSurvival.Module.HomeMenu
 {
     public class HomeInitState : FSMState
     {
-        [SerializeField] private AudioClip audioBackground;
-
         private HomeFSMDependency dependency;
 
         public override string GetState()
@@ -22,7 +21,7 @@ namespace CircleSurvival.Module.HomeMenu
 
         public override void OnEnter()
         {
-            //AutoShGame.Base.Sound.SoundManager.Instance.PlayBySource(audioBackground);
+            dependency.component.homeBGSoundController.PlaySound();
             dependency.component.buttonSettings.onClick.AddListener(OnSetupListenerSettingsButton);
             dependency.component.buttonPlayGame.onClick.AddListener(OnSetupListenerPlayGameButton);
             dependency.component.buttonShop.onClick.AddListener(OnSetupListenerOpenShopButton);

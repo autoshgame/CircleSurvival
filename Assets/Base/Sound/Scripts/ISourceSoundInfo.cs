@@ -29,6 +29,20 @@ namespace AutoShGame.Base.Sound
         /// Play the source
         /// </summary>
         public void Play();
+
+        /// <summary>
+        /// Get the source ID
+        /// <br></br>
+        /// Source ID is used to restore the audioSource to recycled audioSource
+        /// </summary>
+        /// <returns></returns>
+        public int GetSourceID();
+
+        /// <summary>
+        /// Change the AudioClip of the source
+        /// </summary>
+        /// <param name="audioClip"></param>
+        public void SetAudioClip(AudioClip audioClip);
     }
 }
 

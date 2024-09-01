@@ -1,5 +1,7 @@
 using UnityEngine;
 using AutoShGame.Base.FSMState;
+using AutoShGame.Base.Sound;
+using AutoShGame.Base.Observer;
 
 public class SwordV2 : BaseWeaponV2, ICollidable
 {
@@ -7,6 +9,8 @@ public class SwordV2 : BaseWeaponV2, ICollidable
     [SerializeField] private CapsuleCollider2D baseCollider;
     [SerializeField] private RotateV2 rotateV2;
     [SerializeField] private Transform targetRotate;
+
+    [SerializeField] private AudioClip hitAudio;
 
     //Hard Code + Ram management
     [Header("Scriptable Object")]
@@ -50,6 +54,8 @@ public class SwordV2 : BaseWeaponV2, ICollidable
 
     public void OnCollisionDetection()
     {
+        SoundTopic soundTopic = new SoundTopic(hitAudio, SourceConfigType.TwoD);
+        Observer.Instance.NotifyObservers(soundTopic);
         rotateV2.ReverseRotate();
     }
 
@@ -80,6 +86,7 @@ public class SwordV2 : BaseWeaponV2, ICollidable
         rotateV2.SetRotateStatus(status);
     }
 }
+
 
 public class SwordV2Data
 {

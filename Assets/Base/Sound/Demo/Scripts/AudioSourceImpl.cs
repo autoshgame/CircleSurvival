@@ -38,5 +38,15 @@ namespace AutoShGame.Base.Sound
         {
             audioSource.Play();
         }
+
+        public int GetSourceID()
+        {
+            return audioSource.GetInstanceID();
+        }
+
+        public void SetAudioClip(AudioClip audioClip)
+        {
+            audioSource.clip = audioClip;
+        }
     }
 }

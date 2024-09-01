@@ -26,7 +26,34 @@ namespace AutoShGame.Base.Sound
         private SourceSoundInfoTypeResolver typeResolver = new SourceSoundInfoTypeResolver();
         private SourceConfigResolver configResolver = new SourceConfigResolver();
 
-        public ISourceSoundInfo Play(AudioClip audio, SourceConfigType sourceConfigType, bool loop = false, Transform parent = null) 
+        public ISourceSoundInfo PlayKeepSource(AudioClip audio, SourceConfigType sourceConfigType = SourceConfigType.TwoD, bool loop = false, Transform parent = null) 
+        {
+            ISourceSoundInfo iSourceSoundInfo = null;
+            AudioSource audioSource = null;
+
+            Type T = typeResolver.ResolveType();
+
+            if (donePlayAudioSource.Count > 0) 
+            {
+                audioSource = donePlayAudioSource[donePlayAudioSource.Count - 1];
+                donePlayAudioSource.RemoveAt(donePlayAudioSource.Count - 1);
+                AddPlayAudioSource(audioSource, audio, loop, audio.name, sourceConfigType);
+                iSourceSoundInfo = audioSource.GetComponent(T) as ISourceSoundInfo;
+            }
+            else
+            {
+                GameObject source = new GameObject();
+                audioSource = source.AddComponent<AudioSource>();
+                AddPlayAudioSource(audioSource, audio, loop, audio.name, sourceConfigType);
+                iSourceSoundInfo = source.AddComponent<AudioSourceImpl>() as ISourceSoundInfo;
+            }
+
+            if (parent != null) audioSource.transform.parent = parent;
+            StartCoroutine(IEPlay(audio.length, audioSource, true));
+            return iSourceSoundInfo;
+        }
+
+        public void Play(AudioClip audio, SourceConfigType sourceConfigType = SourceConfigType.TwoD, bool loop = false, Transform parent = null)
         {
             ISourceSoundInfo iSourceSoundInfo = null;
             AudioSource audioSource = null;
@@ -49,29 +76,6 @@ namespace AutoShGame.Base.Sound
             }
 
             if (parent != null) audioSource.transform.parent = parent;
-            StartCoroutine(IEPlay(audio.length, audioSource, true));
-            return iSourceSoundInfo;
-        }
-
-        public void Play(AudioClip audio, bool loop = false, Transform parent = null)
-        {
-            AudioSource audioSource = null;
-
-            if (donePlayAudioSource.Count > 0)
-            {
-                audioSource = donePlayAudioSource[donePlayAudioSource.Count - 1];
-                donePlayAudioSource.RemoveAt(donePlayAudioSource.Count - 1);
-                AddPlayAudioSource(audioSource, audio, loop, audio.name);
-            }
-            else
-            {
-                GameObject source = new GameObject();
-                audioSource = source.AddComponent<AudioSource>();
-                AddPlayAudioSource(audioSource, audio, loop, audio.name);
-            }
-
-            if (parent != null) audioSource.transform.parent = parent;
-            audioSource.Play();
             StartCoroutine(IEPlay(audio.length, audioSource, false));
         }
 
