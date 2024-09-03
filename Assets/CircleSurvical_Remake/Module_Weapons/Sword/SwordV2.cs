@@ -48,8 +48,11 @@ public class SwordV2 : BaseWeaponV2, ICollidable
 
     public override void SetLevel(int level)
     {
-        rotateV2.SetRotationSpeed(swordSO.props[level].rotateSpeed);
-        transform.localScale = swordSO.props[level].scale;
+        if (swordSO.props.ContainsKey(level))
+        {
+            rotateV2.SetRotationSpeed(swordSO.props[level].rotateSpeed);
+            transform.localScale = swordSO.props[level].scale;
+        }
     }
 
     public void OnCollisionDetection()

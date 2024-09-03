@@ -272,6 +272,7 @@ MonoBehaviour:
   itemImage: {fileID: 4916294573535115891}
   btnClick: {fileID: 4916294572005076343}
   txtState: {fileID: 4916294571827461258}
+  audioClick: {fileID: 8300000, guid: 4e50b5ec41696984c960a11a8466513d, type: 3}
 --- !u!1 &4916294573535115893
 GameObject:
   m_ObjectHideFlags: 0

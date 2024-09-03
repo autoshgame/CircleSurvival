@@ -25,7 +25,11 @@ public class MainGameWinState : FSMState
 
     public override void OnEnter()
     {
-        mainGameFSMDependency.component.playerFSMComponent.manager.gameObject.SetActive(false);
+        //mainGameFSMDependency.component.playerFSMComponent.manager.gameObject.SetActive(false);
+
+        mainGameFSMDependency.component.playerFSMComponent.playerRigidbody2D.transform.localScale = Vector3.zero;
+        mainGameFSMDependency.component.playerFSMComponent.weapon.SetStatus(false);
+        mainGameFSMDependency.component.playerFSMComponent.weapon.transform.localScale = Vector3.zero;
 
         StartCoroutine(UpdatePlayerCurrency());
     }

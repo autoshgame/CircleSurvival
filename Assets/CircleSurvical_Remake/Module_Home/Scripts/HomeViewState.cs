@@ -61,14 +61,14 @@ namespace CircleSurvival.Module.HomeMenu
 
     public class HomeViewStateTopic
     {
-        public string action;
+        public HomeViewStateAction action;
     }
 
-    public static class HomeViewStateAction
+    public enum HomeViewStateAction
     {
-        public const string OPEN_SETTINGS = "OPEN_SETTINGS";
-        public const string PLAY_GAME = "PLAY_GAME";
-        public const string OPEN_SHOP = "OPEN_SHOP";
-        public const string EXIT_GAME = "EXIT_GAME";
+        OPEN_SETTINGS,
+        PLAY_GAME,
+        OPEN_SHOP,
+        EXIT_GAME
     }
 }

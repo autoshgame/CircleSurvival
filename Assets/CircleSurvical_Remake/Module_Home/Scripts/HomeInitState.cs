@@ -46,14 +46,14 @@ namespace CircleSurvival.Module.HomeMenu
         private void OnSetupListenerOpenShopButton()
         {
             HomeViewStateTopic homeViewStateTopic = new HomeViewStateTopic();
-            homeViewStateTopic.action = "OPEN_SHOP";
+            homeViewStateTopic.action = HomeViewStateAction.OPEN_SHOP;
             Observer.Instance?.NotifyObservers(homeViewStateTopic);
         }
 
         private void OnSetupListenerExitGameButton()
         {
             HomeViewStateTopic homeViewStateTopic = new HomeViewStateTopic();
-            homeViewStateTopic.action = "EXIT_GAME";
+            homeViewStateTopic.action = HomeViewStateAction.EXIT_GAME;
             Observer.Instance?.NotifyObservers(homeViewStateTopic);
         }
     }

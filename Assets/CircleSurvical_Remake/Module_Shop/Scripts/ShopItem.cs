@@ -1,12 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 using AutoShGame.Base.Observer;
+using AutoShGame.Base.Sound;
 
 public class ShopItem : MonoBehaviour
 {
     [SerializeField] private Image itemImage;
     [SerializeField] private Button btnClick;
     [SerializeField] private TMPro.TMP_Text txtState;
+
+    [SerializeField] private AudioClip audioClick;
 
     private ShopItemData shopItemdata;
     public ShopItemData ShopItemData { get => shopItemdata; }
@@ -49,6 +52,9 @@ public class ShopItem : MonoBehaviour
         shopViewStateTopic.Action = ShopViewStateTopicAction.CLICK_ITEM;
         Observer.Instance.NotifyObservers<ShopViewStateTopic>(shopViewStateTopic);
         //Event
+
+        SoundTopic soundTopic = new SoundTopic(audioClick);
+        Observer.Instance.NotifyObservers(soundTopic);
     }
 }
 
