@@ -19,6 +19,7 @@ public class HomeBGSoundController : MonoBehaviour
     {
         yield return new WaitUntil(() => sourceSoundInfo != null);
         sourceSoundInfo.Play();
+        sourceSoundInfo.SetParents(this.transform);
     }
 
     private void OnApplicationPause(bool pause)
@@ -28,5 +29,12 @@ public class HomeBGSoundController : MonoBehaviour
             sourceSoundInfo.SetAudioClip(bgAudioClip);
             sourceSoundInfo.Play();
         }
+    }
+
+    private void OnDestroy()
+    {
+        SoundReleaseTopic soundReleaseTopic = new SoundReleaseTopic(sourceSoundInfo.GetSourceID());
+        Observer.Instance?.NotifyObservers(soundReleaseTopic);
+        sourceSoundInfo = null;
     }
 }

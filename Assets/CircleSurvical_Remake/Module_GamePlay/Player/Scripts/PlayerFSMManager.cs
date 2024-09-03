@@ -35,7 +35,10 @@ public class PlayerFSMManager : FSMManager
         playerDeadState = GetComponent<PlayerDeadState>();
         playerDeadState.OnSetupDependency(playerFSMDependency);
         dicState.Add(playerDeadState.GetState(), playerDeadState);
+    }
 
+    private void Start()
+    {
         ChangeState(PlayerState.INIT);
     }
 

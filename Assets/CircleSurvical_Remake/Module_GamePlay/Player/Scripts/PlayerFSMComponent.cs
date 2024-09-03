@@ -9,5 +9,7 @@ public class PlayerFSMComponent : MonoBehaviour
     public BaseWeaponV2 weapon;
     public PlayerStat stat;
     public TMPro.TMP_Text txtLevel;
-    public PlayerOutSystemDetection playerOutSystemDetection; 
+    public PlayerOutSystemDetection playerOutSystemDetection;
+
+    public AudioClip audioUpgradeLevel;
 }

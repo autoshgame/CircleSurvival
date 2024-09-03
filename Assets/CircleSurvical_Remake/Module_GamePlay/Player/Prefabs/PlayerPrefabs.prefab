@@ -368,6 +368,7 @@ MonoBehaviour:
   stat: {fileID: 1212850677}
   txtLevel: {fileID: 5838212483890282016}
   playerOutSystemDetection: {fileID: 5838212483610607508}
+  audioUpgradeLevel: {fileID: 8300000, guid: 5d2f4bd000e56a94f8604d1de02d3527, type: 3}
 --- !u!114 &1212850675
 MonoBehaviour:
   m_ObjectHideFlags: 0

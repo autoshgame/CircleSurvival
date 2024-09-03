@@ -45,7 +45,7 @@ namespace AutoShGame.Base.Sound
                 GameObject source = new GameObject();
                 audioSource = source.AddComponent<AudioSource>();
                 AddPlayAudioSource(audioSource, audio, loop, audio.name, sourceConfigType);
-                iSourceSoundInfo = source.AddComponent<AudioSourceImpl>() as ISourceSoundInfo;
+                iSourceSoundInfo = source.AddComponent(T) as ISourceSoundInfo;
             }
 
             if (parent != null) audioSource.transform.parent = parent;
@@ -53,7 +53,7 @@ namespace AutoShGame.Base.Sound
             return iSourceSoundInfo;
         }
 
-        public void Play(AudioClip audio, SourceConfigType sourceConfigType = SourceConfigType.TwoD, bool loop = false, Transform parent = null)
+        public void Play(AudioClip audio, Vector3 position, SourceConfigType sourceConfigType = SourceConfigType.TwoD, bool loop = false)
         {
             ISourceSoundInfo iSourceSoundInfo = null;
             AudioSource audioSource = null;
@@ -72,10 +72,12 @@ namespace AutoShGame.Base.Sound
                 GameObject source = new GameObject();
                 audioSource = source.AddComponent<AudioSource>();
                 AddPlayAudioSource(audioSource, audio, loop, audio.name, sourceConfigType);
-                iSourceSoundInfo = source.AddComponent<AudioSourceImpl>() as ISourceSoundInfo;
+                iSourceSoundInfo = source.AddComponent(T) as ISourceSoundInfo;
             }
 
-            if (parent != null) audioSource.transform.parent = parent;
+            audioSource.transform.parent = this.transform;
+            audioSource.transform.position = position;
+            audioSource.Play();
             StartCoroutine(IEPlay(audio.length, audioSource, false));
         }
 
@@ -110,6 +112,11 @@ namespace AutoShGame.Base.Sound
             audioSource.spatialBlend = configProps.spatialBlend;
 
             currentPlayAudioSource.Add(audioSource);
+        }
+
+        public void ReleaseAudioSource(int sourceInstanceID)
+        {
+            currentPlayAudioSource.RemoveAll((item) => item.GetInstanceID() == sourceInstanceID);
         }
     }
 }

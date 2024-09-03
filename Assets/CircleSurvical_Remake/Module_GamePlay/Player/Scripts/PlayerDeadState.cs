@@ -1,5 +1,6 @@
 using AutoShGame.Base.FSMState;
 using AutoShGame.Base.Observer;
+using UnityEngine;
 
 public class PlayerDeadState : FSMState
 {
@@ -21,8 +22,10 @@ public class PlayerDeadState : FSMState
         dependency.component.movement.CanMove = false;
         dependency.component.weapon.SetStatus(false);
 
-        dependency.component.playerRigidbody2D.gameObject.SetActive(false);
-        dependency.component.weapon.gameObject.SetActive(false);
+        dependency.component.playerRigidbody2D.transform.localScale = Vector3.zero;
+        dependency.component.weapon.gameObject.transform.localScale = Vector3.zero;
+        //dependency.component.playerRigidbody2D.gameObject.SetActive(false);
+        //dependency.component.weapon.gameObject.SetActive(false);
 
         PlayerDeadStateTopic playerDeadStateTopic = new PlayerDeadStateTopic();
         Observer.Instance.NotifyObservers(playerDeadStateTopic);
