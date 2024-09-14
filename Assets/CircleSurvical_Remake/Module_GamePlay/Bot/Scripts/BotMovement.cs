@@ -20,7 +20,7 @@ public class BotMovement : MonoBehaviour
     {
         if (canMove == false) return;
 
-        if (botFSMComponent.enemyDetection.Target != null && botFSMComponent.enemyDetection.Target.gameObject.activeInHierarchy)
+        if (botFSMComponent.enemyDetection.Target != null && botFSMComponent.enemyDetection.Target.gameObject.activeInHierarchy && botFSMComponent.enemyDetection.Target.transform.localScale != Vector3.zero)
         {
             randomRangeWhenDetectOpposite = Random.Range(0f, 1.5f);
             if (Vector2.Distance(transform.position, botFSMComponent.enemyDetection.Target.position) > randomRangeWhenDetectOpposite && isMoveOpposite == false)

@@ -36,9 +36,11 @@ public class BotEnemyDetection : MonoBehaviour
         if (player != null)
         {
             distancePlayer = Vector2.Distance(this.transform.position, player.position);
-        } 
+        }
 
-        if (distancePlayer <= distance + 2 && player != null && player.gameObject.activeInHierarchy)
+        int randomRedirectToPlayer = Random.Range(0, 4);
+
+        if ((randomRedirectToPlayer == 0) || (distancePlayer <= distance + 3) && player != null && player.gameObject.transform.localScale != Vector3.zero)
         {
             target = player;
         }

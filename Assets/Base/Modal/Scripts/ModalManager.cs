@@ -64,6 +64,10 @@ namespace AutoShGame.Base.Modal
             {
                 return modals[type];
             }
+            else
+            {
+                modals.Remove(type);
+            }
             
             Debug.LogError("WARNING , MODAl " + type.Name + " DONT EXSISTS");
             return null;

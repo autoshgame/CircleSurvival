@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 100
-  moveSpeed: 500
+  moveSpeed: 300
   playerFSMComponent: {fileID: 1212850674}
 --- !u!114 &5838212483610607508
 MonoBehaviour:

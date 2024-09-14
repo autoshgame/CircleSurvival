@@ -2,6 +2,7 @@ using AutoShGame.Base.FSMState;
 using AutoShGame.Base.Observer;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using AutoShGame.Base.Modal;
 
 
 namespace CircleSurvival.Module.HomeMenu
@@ -42,7 +43,7 @@ namespace CircleSurvival.Module.HomeMenu
             switch (data.action)
             {
                 case HomeViewStateAction.OPEN_SETTINGS:
-                    Debug.Log("OPEN SETTINGS");
+                    ModalManager.Instance.Push<SettingsModal>().Show();
                     break;
                 case HomeViewStateAction.PLAY_GAME:
                     SceneManager.LoadScene("_MainGamePlay");

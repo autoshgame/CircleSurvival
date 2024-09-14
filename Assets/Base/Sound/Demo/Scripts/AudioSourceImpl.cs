@@ -7,8 +7,8 @@ namespace AutoShGame.Base.Sound
     public class AudioSourceImpl : MonoBehaviour, ISourceSoundInfo
     {
         private AudioSource audioSource;
-        private int curVolume = 1;
-        private bool isInit;
+        private float configVolume = 1;
+        private float multiplyVolume = 1;
 
         private void Awake()
         {
@@ -22,16 +22,14 @@ namespace AutoShGame.Base.Sound
 
         public void SetVolume(float volume)
         {
-            audioSource.volume = volume * curVolume;
+            multiplyVolume = volume;
+            audioSource.volume = configVolume * multiplyVolume;
         }
 
-        public void ApplyGlobalConfig(int volume)
+        public void ApplyGlobalConfig(float volume)
         {
-            if (!isInit)
-            {
-                curVolume = volume;
-                isInit = true;
-            }
+            configVolume = volume;
+            audioSource.volume = configVolume * multiplyVolume;
         }
 
         public void Play()

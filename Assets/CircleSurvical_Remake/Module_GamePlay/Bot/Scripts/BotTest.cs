@@ -78,7 +78,7 @@ public class BotTest : MonoBehaviour, IObservableAutoSh<BotDeadStateChannel>, IO
                         randomIndex = Random.Range(0, listBotDead.Count);
 
                         int level = 0;
-                        randomLevelSpawn = Random.Range(level, level + 4);
+                        randomLevelSpawn = Random.Range(level, level + 3);
                         randomIndex = Random.Range(0, randomSword.Count);
                         randomIndex = Random.Range(0, listBotDead.Count);
 

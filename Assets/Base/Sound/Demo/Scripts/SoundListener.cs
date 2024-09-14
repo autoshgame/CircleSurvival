@@ -4,18 +4,26 @@ using System;
 
 namespace AutoShGame.Base.Sound
 {
-    public class SoundListener : MonoBehaviour, IObservableAutoSh<SoundTopic>, IObservableAutoSh<SoundReleaseTopic>
+    public class SoundListener : MonoBehaviour, IObservableAutoSh<SoundTopic>, IObservableAutoSh<SoundReleaseTopic>, IObservableAutoSh<SoundGlobalConfigTopic>
     {
+        private void Awake()
+        {
+            float volume = PlayerPrefs.GetFloat(Constant.KEY_CONFIG_VOLUME, 1f);
+            SoundManager.Instance.SetConfigVolume(volume);
+        }
+
         private void OnEnable()
         {
             Observer.Observer.Instance?.RegisterObserver<SoundTopic>(this);
             Observer.Observer.Instance?.RegisterObserver<SoundReleaseTopic>(this);
+            Observer.Observer.Instance?.RegisterObserver<SoundGlobalConfigTopic>(this);
         }
 
         private void OnDisable()
         {
             Observer.Observer.Instance?.RemoveObserver<SoundTopic>(this);
             Observer.Observer.Instance?.RemoveObserver<SoundReleaseTopic>(this);
+            Observer.Observer.Instance?.RemoveObserver<SoundGlobalConfigTopic>(this);
         }
 
         public void OnObserverNotify(SoundTopic data)
@@ -34,6 +42,11 @@ namespace AutoShGame.Base.Sound
         public void OnObserverNotify(SoundReleaseTopic data)
         {
             SoundManager.Instance.ReleaseAudioSource(data.sourceSoundInfoInstanceID);
+        }
+
+        public void OnObserverNotify(SoundGlobalConfigTopic data)
+        {
+            SoundManager.Instance.ChangeVolume(data.volume);
         }
     }
 
@@ -92,6 +105,16 @@ namespace AutoShGame.Base.Sound
         public SoundReleaseTopic(int sourceSoundInfoInstanceID)
         {
             this.sourceSoundInfoInstanceID = sourceSoundInfoInstanceID;
+        }
+    }
+
+    public class SoundGlobalConfigTopic
+    {
+        public float volume;
+
+        public SoundGlobalConfigTopic(float volume)
+        {
+            this.volume = volume;
         }
     }
 }

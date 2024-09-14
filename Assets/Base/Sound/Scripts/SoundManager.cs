@@ -17,14 +17,16 @@ namespace AutoShGame.Base.Sound
     /// 4 : Pause, Start An audio source and OnDone Callback <br></br>
     /// 5 : AudioSource config (Can we seperate create audiosource + play ?)
     /// </summary>
+    [DefaultExecutionOrder(-99)]
     public class SoundManager : Singleton<SoundManager>
     {
-
         private List<AudioSource> currentPlayAudioSource = new List<AudioSource>();
         private List<AudioSource> donePlayAudioSource = new List<AudioSource>();
 
         private SourceSoundInfoTypeResolver typeResolver = new SourceSoundInfoTypeResolver();
         private SourceConfigResolver configResolver = new SourceConfigResolver();
+
+        private float configVolume = 1;
 
         public ISourceSoundInfo PlayKeepSource(AudioClip audio, SourceConfigType sourceConfigType = SourceConfigType.TwoD, bool loop = false, Transform parent = null) 
         {
@@ -49,6 +51,7 @@ namespace AutoShGame.Base.Sound
             }
 
             if (parent != null) audioSource.transform.parent = parent;
+            iSourceSoundInfo.ApplyGlobalConfig(configVolume);
             StartCoroutine(IEPlay(audio.length, audioSource, true));
             return iSourceSoundInfo;
         }
@@ -66,6 +69,7 @@ namespace AutoShGame.Base.Sound
                 donePlayAudioSource.RemoveAt(donePlayAudioSource.Count - 1);
                 AddPlayAudioSource(audioSource, audio, loop, audio.name, sourceConfigType);
                 iSourceSoundInfo = audioSource.GetComponent(T) as ISourceSoundInfo;
+                iSourceSoundInfo.ApplyGlobalConfig(configVolume);
             }
             else
             {
@@ -73,6 +77,7 @@ namespace AutoShGame.Base.Sound
                 audioSource = source.AddComponent<AudioSource>();
                 AddPlayAudioSource(audioSource, audio, loop, audio.name, sourceConfigType);
                 iSourceSoundInfo = source.AddComponent(T) as ISourceSoundInfo;
+                iSourceSoundInfo.ApplyGlobalConfig(configVolume);
             }
 
             audioSource.transform.parent = this.transform;
@@ -117,6 +122,21 @@ namespace AutoShGame.Base.Sound
         public void ReleaseAudioSource(int sourceInstanceID)
         {
             currentPlayAudioSource.RemoveAll((item) => item.GetInstanceID() == sourceInstanceID);
+        }
+
+        public void ChangeVolume(float volume)
+        {
+            configVolume = volume;
+
+            foreach (AudioSource source in currentPlayAudioSource)
+            {
+                 source.gameObject.GetComponent<ISourceSoundInfo>().ApplyGlobalConfig(configVolume);
+            }
+        }
+
+        public void SetConfigVolume(float volume)
+        {
+            configVolume = volume;
         }
     }
 }

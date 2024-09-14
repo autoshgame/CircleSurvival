@@ -6,7 +6,7 @@ namespace AutoShGame.Base.Sound
 {
     public interface ISourceSoundInfo
     {
-        public void ApplyGlobalConfig(int volume);
+        public void ApplyGlobalConfig(float volume);
 
         /// <summary>
         /// When you need to change the volume in the audio source, must use the SetVolume Function
@@ -18,6 +18,7 @@ namespace AutoShGame.Base.Sound
         /// </summary>
         /// <param name="volume"></param>
         public void SetVolume(float volume);
+
 
         /// <summary>
         /// Set the parents for the audio source
