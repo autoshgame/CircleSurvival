@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/CircleSurvical_Remake/Module_SPL/Scene/Spl.unity
+    path: Assets/_Root/Module_SPL/Scene/Spl.unity
     guid: 25136ec956dcdfa459f57a7a655eaa8c
   - enabled: 1
-    path: Assets/CircleSurvical_Remake/Module_Home/Scene/Home.unity
+    path: Assets/_Root/Module_Home/Scene/Home.unity
     guid: c62e59e4c164fd04fbb6cee578915c39
   - enabled: 1
-    path: Assets/CircleSurvical_Remake/Module_GamePlay/Main_/Scene/_MainGamePlay.unity
+    path: Assets/_Root/Module_GamePlay/Main_/Scene/_MainGamePlay.unity
     guid: 8159659a6997cc24ba027bc207353f69
   m_configObjects: {}

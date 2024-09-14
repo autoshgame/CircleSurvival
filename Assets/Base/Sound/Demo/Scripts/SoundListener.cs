@@ -9,7 +9,7 @@ namespace AutoShGame.Base.Sound
         private void Awake()
         {
             float volume = PlayerPrefs.GetFloat(Constant.KEY_CONFIG_VOLUME, 1f);
-            SoundManager.Instance.SetConfigVolume(volume);
+            SoundManager.Instance.ChangeVolume(volume);
         }
 
         private void OnEnable()
@@ -98,6 +98,7 @@ namespace AutoShGame.Base.Sound
         }
     }
 
+    [System.Serializable]
     public class SoundReleaseTopic
     {
         public int sourceSoundInfoInstanceID;
@@ -108,6 +109,7 @@ namespace AutoShGame.Base.Sound
         }
     }
 
+    [System.Serializable]
     public class SoundGlobalConfigTopic
     {
         public float volume;

@@ -133,10 +133,5 @@ namespace AutoShGame.Base.Sound
                  source.gameObject.GetComponent<ISourceSoundInfo>().ApplyGlobalConfig(configVolume);
             }
         }
-
-        public void SetConfigVolume(float volume)
-        {
-            configVolume = volume;
-        }
     }
 }
