@@ -7,5 +7,5 @@ using UnityEngine;
 public class ConfigScriptable : ScriptableObject
 {
     [SerializeField] private bool turnOnMockService;
-    public bool TurnOnMockService { get => turnOnMockService; }
+    public bool TurnOnMockService { get => turnOnMockService; set => turnOnMockService = value; }
 }
