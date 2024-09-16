@@ -38,7 +38,7 @@ public class PlayerInitState : FSMState
 
         skinDataTopic.actionType = ActionType.GET;
         skinDataTopic.onLoadSuccess = (value) => { isLoadSkinDataSuccess = value; };
-        Observer.Instance.NotifyObservers(skinDataTopic);
+        ObserverAutoSh.NotifyObservers(skinDataTopic);
         //end load skin data
 
         yield return new WaitUntil(() => isLoadSkinDataSuccess);

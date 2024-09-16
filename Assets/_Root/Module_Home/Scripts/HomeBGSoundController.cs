@@ -11,7 +11,7 @@ public class HomeBGSoundController : MonoBehaviour
     public void PlaySound()
     {
         SoundTopic bgSoundTopic = new SoundTopic(bgAudioClip, SourceConfigType.TwoD, OnReceiveSourceSound: (value) => sourceSoundInfo = value, loop: true);
-        Observer.Instance.NotifyObservers(bgSoundTopic);
+        ObserverAutoSh.NotifyObservers(bgSoundTopic);
         StartCoroutine(IPlaySound());
     }
 
@@ -34,7 +34,7 @@ public class HomeBGSoundController : MonoBehaviour
     private void OnDestroy()
     {
         SoundReleaseTopic soundReleaseTopic = new SoundReleaseTopic(sourceSoundInfo.GetSourceID());
-        Observer.Instance?.NotifyObservers(soundReleaseTopic);
+        ObserverAutoSh.NotifyObservers(soundReleaseTopic);
         sourceSoundInfo = null;
     }
 }

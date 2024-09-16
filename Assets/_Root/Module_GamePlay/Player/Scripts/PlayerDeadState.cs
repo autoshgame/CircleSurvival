@@ -28,7 +28,7 @@ public class PlayerDeadState : FSMState
         //dependency.component.weapon.gameObject.SetActive(false);
 
         PlayerDeadStateTopic playerDeadStateTopic = new PlayerDeadStateTopic();
-        Observer.Instance.NotifyObservers(playerDeadStateTopic);
+        ObserverAutoSh.NotifyObservers(playerDeadStateTopic);
     }
 }
 

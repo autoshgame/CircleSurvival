@@ -39,6 +39,6 @@ public class MainGameInitState : FSMState
     {
         MainGamePlayTopic mainGamePlayTopic = new MainGamePlayTopic();
         mainGamePlayTopic.action = MainGamePlayTopicAction.PAUSE_GAME;
-        Observer.Instance.NotifyObservers(mainGamePlayTopic);
+        ObserverAutoSh.NotifyObservers(mainGamePlayTopic);
     }
 }

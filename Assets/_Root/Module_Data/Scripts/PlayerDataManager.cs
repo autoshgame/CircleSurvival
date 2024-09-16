@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System;
 using AutoShGame.Base.Observer;
-using AutoShGame.Base.MonoSingleton;
 
-public class PlayerDataManager : Singleton<PlayerDataManager>, 
-    IObservableAutoSh<CurrencyDataTopic>, 
-    IObservableAutoSh<SkinDataTopic>
+public class PlayerDataManager : MonoBehaviour, IObservableAutoSh<CurrencyDataTopic>, IObservableAutoSh<SkinDataTopic>
 {
     private string filepath;
     private PlayerData userData;
@@ -15,24 +12,22 @@ public class PlayerDataManager : Singleton<PlayerDataManager>,
     CurrencyData currencyGroup = new CurrencyData();
     SkinData skinData = new SkinData();
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
-
         filepath = $"{Application.persistentDataPath}/user.json";
         LoadUserData();
     }
 
     private void OnEnable()
     {
-        Observer.Instance?.RegisterObserver<CurrencyDataTopic>(this);
-        Observer.Instance?.RegisterObserver<SkinDataTopic>(this);
+        ObserverAutoSh.RegisterObserver<CurrencyDataTopic>(this);
+        ObserverAutoSh.RegisterObserver<SkinDataTopic>(this);
     }
 
     private void OnDisable()
     {
-        Observer.Instance?.RemoveObserver<CurrencyDataTopic>(this);
-        Observer.Instance?.RemoveObserver<SkinDataTopic>(this);
+        ObserverAutoSh.RemoveObserver<CurrencyDataTopic>(this);
+        ObserverAutoSh.RemoveObserver<SkinDataTopic>(this);
     }
 
     public void OnObserverNotify(CurrencyDataTopic data)

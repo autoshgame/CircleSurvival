@@ -12,10 +12,6 @@ namespace AutoShGame.Base.FSMState
 
         public virtual void OnEnter(object data = null) { }
 
-        public virtual void OnUpdate() { }
-
-        public virtual void OnFixedUpdate() { }
-
         public virtual void OnExit() { }
     }
 }

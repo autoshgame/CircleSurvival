@@ -23,7 +23,7 @@ public class BotDeadState : FSMState
 
         BotDeadStateChannel botDeadStateChannel = new BotDeadStateChannel();
         botDeadStateChannel.deadBot = dependency.component.manager;
-        Observer.Instance.NotifyObservers(botDeadStateChannel);
+        ObserverAutoSh.NotifyObservers(botDeadStateChannel);
     }
 }
 

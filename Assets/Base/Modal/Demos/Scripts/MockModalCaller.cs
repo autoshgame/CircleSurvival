@@ -1,6 +1,4 @@
 using UnityEngine;
-using AutoShGame.Base.Sound;
-using AutoShGame.Base.Observer;
 
 namespace AutoShGame.Base.Modal
 {
@@ -11,10 +9,10 @@ namespace AutoShGame.Base.Modal
         // Start is called before the first frame update
         void Start()
         {
-            ModalManager.Instance.Push<SettingsModal>().Show();
+            //ModalManager.Instance.Push<SettingsModal>().Show();
 
-            SoundTopic sound = new SoundTopic(audioTest);
-            AutoShGame.Base.Observer.Observer.Instance.NotifyObservers(sound);
+            //SoundTopic sound = new SoundTopic(audioTest);
+            //AutoShGame.Base.ObserverAutoSh.ObserverAutoSh.NotifyObservers(sound);
         }
     }
 }

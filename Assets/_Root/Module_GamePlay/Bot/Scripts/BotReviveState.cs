@@ -26,7 +26,7 @@ public class BotReviveState : FSMState
             /*
             BotReviveStateChannel botReviveStateChannel = new BotReviveStateChannel();
             botReviveStateChannel.aliveBot = dependency.component.manager;
-            Observer.Instance.NotifyObservers(botReviveStateChannel);
+            ObserverAutoSh.NotifyObservers(botReviveStateChannel);
             */
 
             botReviveStateData = data as BotReviveStateData;

@@ -46,7 +46,7 @@ public class MainGameWinState : FSMState
 
         testGameDataTopic.actionType = ActionType.GET;
         testGameDataTopic.onLoadSuccess = (value) => { isLoadCurrencyDataSuccess = value; };
-        Observer.Instance.NotifyObservers(testGameDataTopic);
+        ObserverAutoSh.NotifyObservers(testGameDataTopic);
         //end load currency data
 
         yield return new WaitUntil(() => isLoadCurrencyDataSuccess);
@@ -57,7 +57,7 @@ public class MainGameWinState : FSMState
         topic.actionType = ActionType.UPDATE;
         topic.updateData = currencyData;
         topic.onLoadSuccess = (value) => isUpdateCurrencyDataSuccess = value;
-        Observer.Instance.NotifyObservers(topic);
+        ObserverAutoSh.NotifyObservers(topic);
 
         yield return new WaitUntil(() => isUpdateCurrencyDataSuccess);
         //end Update currency data
@@ -66,7 +66,12 @@ public class MainGameWinState : FSMState
         winModalData.actionExit = Exit;
         winModalData.actionReplay = Replay;
         winModalData.coinReceived = coinForWinState;
-        ModalManager.Instance.Push<WinModal>().InitData(winModalData).Show();
+
+        ModalTopic modalTopic = new ModalTopic();
+        modalTopic.modalType = typeof(WinModal);
+        modalTopic.modalData = winModalData;
+        ObserverAutoSh.NotifyObservers(modalTopic);
+
     }
 
     private void Exit()

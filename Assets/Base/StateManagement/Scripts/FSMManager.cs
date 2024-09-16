@@ -24,16 +24,6 @@ namespace AutoShGame.Base.FSMState
             decision = GetComponent<FSMDecision>();    
         }
 
-        private void Update()
-        {
-            if (currentState != null) currentState.OnUpdate();
-        }
-
-        private void FixedUpdate()
-        {
-            if (currentState != null) currentState.OnFixedUpdate();
-        }
-
         public void ChangeState(string state, object data = null)
         {
             if (!dicState.ContainsKey(state))
@@ -68,6 +58,4 @@ namespace AutoShGame.Base.FSMState
             }
         }
     }
-
-
 }

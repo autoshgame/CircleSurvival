@@ -36,14 +36,14 @@ public class BotTest : MonoBehaviour, IObservableAutoSh<BotDeadStateChannel>, IO
 
     private void OnEnable()
     {
-        Observer.Instance.RegisterObserver<BotDeadStateChannel>(this);
-        Observer.Instance.RegisterObserver<BotReviveStateChannel>(this);
+        ObserverAutoSh.RegisterObserver<BotDeadStateChannel>(this);
+        ObserverAutoSh.RegisterObserver<BotReviveStateChannel>(this);
     }
 
     private void OnDisable()
     {
-        Observer.Instance?.RemoveObserver<BotDeadStateChannel>(this);
-        Observer.Instance?.RemoveObserver<BotReviveStateChannel>(this);
+        ObserverAutoSh.RemoveObserver<BotDeadStateChannel>(this);
+        ObserverAutoSh.RemoveObserver<BotReviveStateChannel>(this);
     }
 
     public void OnObserverNotify(BotDeadStateChannel data)

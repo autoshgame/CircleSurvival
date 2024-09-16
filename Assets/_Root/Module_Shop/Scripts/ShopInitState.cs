@@ -40,7 +40,7 @@ public class ShopInitState : FSMState
 
         testGameDataTopic.actionType = ActionType.GET;
         testGameDataTopic.onLoadSuccess = (value) => { isLoadCurrencyDataSuccess = value; };
-        Observer.Instance.NotifyObservers(testGameDataTopic);
+        ObserverAutoSh.NotifyObservers(testGameDataTopic);
         //end load currency data
 
         //Load skin data
@@ -52,7 +52,7 @@ public class ShopInitState : FSMState
 
         skinDataTopic.actionType = ActionType.GET;
         skinDataTopic.onLoadSuccess = (value) => { isLoadSkinDataSuccess = value; };
-        Observer.Instance.NotifyObservers(skinDataTopic);
+        ObserverAutoSh.NotifyObservers(skinDataTopic);
         //end load skin data
 
         yield return new WaitUntil(() => isLoadCurrencyDataSuccess && isLoadSkinDataSuccess);

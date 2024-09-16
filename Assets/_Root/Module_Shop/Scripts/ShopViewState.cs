@@ -18,17 +18,17 @@ public class ShopViewState : FSMState, IObservableAutoSh<ShopViewStateTopic>
 
     public override void OnEnter()
     {
-        Observer.Instance?.RegisterObserver(this);
+        ObserverAutoSh.RegisterObserver(this);
     }
 
     public override void OnExit()
     {
-        Observer.Instance?.RemoveObserver(this);
+        ObserverAutoSh.RemoveObserver(this);
     }
 
     private void OnDestroy()
     {
-        Observer.Instance?.RemoveObserver(this);
+        ObserverAutoSh.RemoveObserver(this);
     }
 
     public void OnObserverNotify(ShopViewStateTopic data)

@@ -13,7 +13,7 @@ namespace CircleSurvival.Module.HomeMenu
 
         private void OnDestroy()
         {
-            Observer.Instance?.RemoveObserver(this);
+            ObserverAutoSh.RemoveObserver(this);
         }
 
         public override void OnSetupDependency<T>(T args)
@@ -28,12 +28,12 @@ namespace CircleSurvival.Module.HomeMenu
 
         public override void OnEnter()
         {
-            Observer.Instance?.RegisterObserver(this);
+            ObserverAutoSh.RegisterObserver(this);
         }
 
         public override void OnExit()
         {
-            Observer.Instance?.RemoveObserver(this);
+            ObserverAutoSh.RemoveObserver(this);
         }
 
         public void OnObserverNotify(HomeViewStateTopic data)
@@ -43,7 +43,9 @@ namespace CircleSurvival.Module.HomeMenu
             switch (data.action)
             {
                 case HomeViewStateAction.OPEN_SETTINGS:
-                    ModalManager.Instance.Push<SettingsModal>().Show();
+                    ModalTopic modalTopic = new ModalTopic();
+                    modalTopic.modalType = typeof(SettingsModal);
+                    ObserverAutoSh.NotifyObservers(modalTopic);
                     break;
                 case HomeViewStateAction.PLAY_GAME:
                     SceneManager.LoadScene("_MainGamePlay");

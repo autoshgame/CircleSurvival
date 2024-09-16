@@ -16,14 +16,14 @@ public class MockData : MonoBehaviour, IObservableAutoSh<CurrencyDataTopic>, IOb
 
     private void OnEnable()
     {
-        Observer.Instance?.RegisterObserver<CurrencyDataTopic>(this);
-        Observer.Instance?.RegisterObserver<SkinDataTopic>(this);
+        ObserverAutoSh.RegisterObserver<CurrencyDataTopic>(this);
+        ObserverAutoSh.RegisterObserver<SkinDataTopic>(this);
     }
 
     private void OnDisable()
     {
-        Observer.Instance?.RemoveObserver<CurrencyDataTopic>(this);
-        Observer.Instance?.RemoveObserver<SkinDataTopic>(this);
+        ObserverAutoSh.RemoveObserver<CurrencyDataTopic>(this);
+        ObserverAutoSh.RemoveObserver<SkinDataTopic>(this);
 
     }
 

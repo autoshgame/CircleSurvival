@@ -19,9 +19,9 @@ namespace AutoShGame.Base.Modal
             }
         }
 
-        public BaseModal GetModalBySource<T>()
+        public BaseModal GetModalBySource(Type type)
         {
-            return modals[typeof(T)];
+            return modals[type];
         }
     }
 }

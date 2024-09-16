@@ -58,7 +58,7 @@ public class SwordV2 : BaseWeaponV2, ICollidable
     public void OnCollisionDetection()
     {
         SoundTopic soundTopic = new SoundTopic(hitAudio, transform.position, SourceConfigType.ThreeD);
-        Observer.Instance.NotifyObservers(soundTopic);
+        ObserverAutoSh.NotifyObservers(soundTopic);
         rotateV2.ReverseRotate();
     }
 

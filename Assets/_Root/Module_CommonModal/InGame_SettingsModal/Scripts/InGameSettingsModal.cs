@@ -51,6 +51,6 @@ public class InGameSettingsModal : BaseModal
     {
         PlayerPrefs.SetFloat(Constant.KEY_CONFIG_VOLUME, value);
         SoundGlobalConfigTopic globalConfigTopic = new SoundGlobalConfigTopic(value);
-        Observer.Instance.NotifyObservers(globalConfigTopic);
+        ObserverAutoSh.NotifyObservers(globalConfigTopic);
     }
 }

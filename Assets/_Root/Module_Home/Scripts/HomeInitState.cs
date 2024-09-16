@@ -33,28 +33,28 @@ namespace CircleSurvival.Module.HomeMenu
         {
             HomeViewStateTopic homeViewStateTopic = new HomeViewStateTopic();
             homeViewStateTopic.action = HomeViewStateAction.OPEN_SETTINGS;
-            Observer.Instance?.NotifyObservers(homeViewStateTopic);
+            ObserverAutoSh.NotifyObservers(homeViewStateTopic);
         }
 
         private void OnSetupListenerPlayGameButton()
         {
             HomeViewStateTopic homeViewStateTopic = new HomeViewStateTopic();
             homeViewStateTopic.action = HomeViewStateAction.PLAY_GAME;
-            Observer.Instance?.NotifyObservers(homeViewStateTopic);
+            ObserverAutoSh.NotifyObservers(homeViewStateTopic);
         }
 
         private void OnSetupListenerOpenShopButton()
         {
             HomeViewStateTopic homeViewStateTopic = new HomeViewStateTopic();
             homeViewStateTopic.action = HomeViewStateAction.OPEN_SHOP;
-            Observer.Instance?.NotifyObservers(homeViewStateTopic);
+            ObserverAutoSh.NotifyObservers(homeViewStateTopic);
         }
 
         private void OnSetupListenerExitGameButton()
         {
             HomeViewStateTopic homeViewStateTopic = new HomeViewStateTopic();
             homeViewStateTopic.action = HomeViewStateAction.EXIT_GAME;
-            Observer.Instance?.NotifyObservers(homeViewStateTopic);
+            ObserverAutoSh.NotifyObservers(homeViewStateTopic);
         }
     }
 }

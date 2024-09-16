@@ -6,6 +6,8 @@ namespace AutoShGame.Base.Pooling
 {
     public class PoolUser : MonoBehaviour
     {
+        [SerializeField] private ObjectPoolManager poolManager;
+
         public TestPool prefabToPool;
         public int amountToPool = 10; // Initial amount to pool
         private GenericObjectPooler<TestPool> gameObjectPooler;
@@ -13,13 +15,13 @@ namespace AutoShGame.Base.Pooling
         void Awake()
         {
             // Get the object pooler for GameObjects with specified parameters
-            ObjectPoolManager.Instance.CreatePool<TestPool>(prefabToPool, amountToPool);
+            poolManager.CreatePool<TestPool>(prefabToPool, amountToPool);
         }
 
         private IEnumerator Start()
         {
             yield return new WaitForSeconds(10f);
-            ObjectPoolManager.Instance.RemovePool<TestPool>();
+            poolManager.RemovePool<TestPool>();
         }
     }
 }

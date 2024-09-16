@@ -2,7 +2,6 @@ using UnityEngine;
 using AutoShGame.Base.Modal;
 using DG.Tweening;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using System;
 
 public class WinModal : BaseModal

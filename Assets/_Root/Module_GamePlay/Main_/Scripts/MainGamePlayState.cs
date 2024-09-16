@@ -19,17 +19,17 @@ public class MainGamePlayState : FSMState, IObservableAutoSh<MainGamePlayTopic>
 
     public override void OnEnter()
     {
-        Observer.Instance?.RegisterObserver(this);
+        ObserverAutoSh.RegisterObserver(this);
     }
 
     public override void OnExit()
     {
-        Observer.Instance?.RemoveObserver(this);
+        ObserverAutoSh.RemoveObserver(this);
     }
 
     private void OnDestroy()
     {
-        Observer.Instance?.RemoveObserver(this);
+        ObserverAutoSh.RemoveObserver(this);
     }
 
     public void OnObserverNotify(MainGamePlayTopic data)
@@ -44,7 +44,9 @@ public class MainGamePlayState : FSMState, IObservableAutoSh<MainGamePlayTopic>
         }
         else if (data.action == MainGamePlayTopicAction.PAUSE_GAME)
         {
-            ModalManager.Instance.Push<InGameSettingsModal>().Show();
+            ModalTopic modalTopic = new ModalTopic();
+            modalTopic.modalType = typeof(InGameSettingsModal);
+            ObserverAutoSh.NotifyObservers(modalTopic);
         }
     }
 }

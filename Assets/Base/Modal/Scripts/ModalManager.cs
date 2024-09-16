@@ -5,15 +5,13 @@ using AutoShGame.Base.MonoSingleton;
 
 namespace AutoShGame.Base.Modal 
 {
-    public class ModalManager : Singleton<ModalManager>
+    public class ModalManager : MonoBehaviour
     {
         private IModalSource _modalSource;
         private readonly Dictionary<Type, BaseModal> modals = new Dictionary<Type, BaseModal>();
 
-        protected override void Awake()
+        private void Awake()
         {
-            base.Awake();
-
             _modalSource = GetComponent<IModalSource>();
 
             if (_modalSource == null)
@@ -28,9 +26,8 @@ namespace AutoShGame.Base.Modal
         /// </summary>
         /// <param name="shouldCache"></param>
         /// <returns></returns>
-        public BaseModal Push<T>(bool shouldCache = false)
+        public BaseModal Push(Type type, bool shouldCache = false)
         {
-            Type type = typeof(T);
             if (modals.ContainsKey(type))
             {
                 if (modals[type] != null)
@@ -43,7 +40,7 @@ namespace AutoShGame.Base.Modal
                 }
             }
 
-            BaseModal ele = Instantiate(_modalSource.GetModalBySource<T>());
+            BaseModal ele = Instantiate(_modalSource.GetModalBySource(type));
 
             if (shouldCache == true) 
             {
@@ -57,9 +54,8 @@ namespace AutoShGame.Base.Modal
         /// Get a modal(If it is cached).The result will be null if the modal is not cached
         /// </summary>
         /// <returns></returns>
-        public BaseModal Get<T>()
+        public BaseModal Get(Type type)
         {
-            Type type = typeof(T);
             if (modals.ContainsKey(type) && modals[type] != null)
             {
                 return modals[type];

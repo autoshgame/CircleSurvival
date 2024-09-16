@@ -26,7 +26,7 @@ public class TestGetData : MonoBehaviour
         
         testGameDataTopic.actionType = ActionType.GET;
         testGameDataTopic.onLoadSuccess = (value) => { isLoadSuccess = value; };
-        Observer.Instance.NotifyObservers(testGameDataTopic);
+        ObserverAutoSh.NotifyObservers(testGameDataTopic);
 
         yield return new WaitUntil(() => isLoadSuccess == true);
 

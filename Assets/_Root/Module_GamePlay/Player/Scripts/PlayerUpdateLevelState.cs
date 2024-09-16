@@ -22,7 +22,7 @@ public class PlayerUpdateLevelState : FSMState
         dependency.component.weapon.SetLevel(dependency.component.stat.level);
         dependency.component.manager.ChangeState(PlayerState.IDLE);
         SoundTopic soundTopic = new SoundTopic(dependency.component.audioUpgradeLevel, SourceConfigType.TwoD);
-        Observer.Instance.NotifyObservers(soundTopic);
+        ObserverAutoSh.NotifyObservers(soundTopic);
     }
 
     public override void OnExit()

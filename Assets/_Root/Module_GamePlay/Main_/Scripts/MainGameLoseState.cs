@@ -20,10 +20,13 @@ public class MainGameLoseState : FSMState
 
     public override void OnEnter()
     {
-        //dependency.component.playerFSMComponent.manager.gameObject.SetActive(false);
         LoseModalData loseModalData = new LoseModalData();
         loseModalData.actionClickExit = ActionClickEndGame;
-        ModalManager.Instance.Push<LoseModal>().InitData(loseModalData).Show();
+
+        ModalTopic modalTopic = new ModalTopic();
+        modalTopic.modalData = loseModalData;
+        modalTopic.modalType = typeof(LoseModal);
+        ObserverAutoSh.NotifyObservers(modalTopic);
     }
 
     public void ActionClickEndGame()

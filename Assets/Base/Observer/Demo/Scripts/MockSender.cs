@@ -9,7 +9,7 @@ public class MockSender : MonoBehaviour
     {
         MockChannel channelData = new MockChannel();
         channelData.message = "HELLO WORLD";
-        Observer.Instance.NotifyObservers(channelData);
+        ObserverAutoSh.NotifyObservers(channelData);
     }
 }
 

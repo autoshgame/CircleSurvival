@@ -6,12 +6,12 @@ namespace AutoShGame.Base.Observer
     {
         private void Awake()
         {
-            Observer.Instance?.RegisterObserver(this);
+            ObserverAutoSh.RegisterObserver(this);
         }
 
         private void OnDisable()
         {
-            Observer.Instance?.RemoveObserver(this);
+            ObserverAutoSh.RemoveObserver(this);
         }
 
         public void OnObserverNotify(MockChannel data)

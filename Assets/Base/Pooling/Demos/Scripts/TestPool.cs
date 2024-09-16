@@ -6,6 +6,8 @@ namespace AutoShGame.Base.Pooling
 {
     public class TestPool : MonoBehaviour
     {
+        private ObjectPoolManager objectPoolManager;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -20,7 +22,7 @@ namespace AutoShGame.Base.Pooling
 
         private void OnDisable()
         {
-            ObjectPoolManager.Instance.GetPool<TestPool>().ReturnToPool(this);
+            objectPoolManager.GetPool<TestPool>().ReturnToPool(this);
         }
     }
 }

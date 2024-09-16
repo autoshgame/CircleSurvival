@@ -1,7 +1,6 @@
 using AutoShGame.Base.Modal;
 using UnityEngine;
 using UnityEngine.UI;
-using AutoShGame.Base.Observer;
 using DG.Tweening;
 using System;
 

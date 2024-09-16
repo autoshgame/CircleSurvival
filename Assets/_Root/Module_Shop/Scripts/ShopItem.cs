@@ -50,11 +50,11 @@ public class ShopItem : MonoBehaviour
         ShopViewStateTopic shopViewStateTopic = new ShopViewStateTopic();
         shopViewStateTopic.itemData = shopItemdata;
         shopViewStateTopic.Action = ShopViewStateTopicAction.CLICK_ITEM;
-        Observer.Instance.NotifyObservers<ShopViewStateTopic>(shopViewStateTopic);
+        ObserverAutoSh.NotifyObservers<ShopViewStateTopic>(shopViewStateTopic);
         //Event
 
         SoundTopic soundTopic = new SoundTopic(audioClick);
-        Observer.Instance.NotifyObservers(soundTopic);
+        ObserverAutoSh.NotifyObservers(soundTopic);
     }
 }
 

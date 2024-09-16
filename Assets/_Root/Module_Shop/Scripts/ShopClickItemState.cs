@@ -61,13 +61,13 @@ public class ShopClickItemState : FSMState
         topic.actionType = ActionType.UPDATE;
         topic.updateData = dependency.component.currency;
         topic.onLoadSuccess = (value) => isUpdateCurrencyDataSuccess = value;
-        Observer.Instance.NotifyObservers(topic);
+        ObserverAutoSh.NotifyObservers(topic);
 
         SkinDataTopic skinDataTopic = new SkinDataTopic();
         skinDataTopic.actionType = ActionType.UPDATE;
         skinDataTopic.updateData = dependency.component.skinData;
         skinDataTopic.onLoadSuccess = (value) => isUpdateSkinDataSuccess = value;
-        Observer.Instance.NotifyObservers(skinDataTopic);
+        ObserverAutoSh.NotifyObservers(skinDataTopic);
 
         yield return new WaitUntil(() => (isUpdateCurrencyDataSuccess && isUpdateSkinDataSuccess));
 
@@ -84,7 +84,7 @@ public class ShopClickItemState : FSMState
         skinDataTopic.actionType = ActionType.UPDATE;
         skinDataTopic.updateData = dependency.component.skinData;
         skinDataTopic.onLoadSuccess = (value) => isUpdateSkinDataSuccess = value;
-        Observer.Instance.NotifyObservers(skinDataTopic);
+        ObserverAutoSh.NotifyObservers(skinDataTopic);
 
         yield return new WaitUntil(() => (isUpdateSkinDataSuccess));
 

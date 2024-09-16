@@ -11,14 +11,14 @@ public class MainGameDecision : MonoBehaviour
 
     private void OnEnable()
     {
-        Observer.Instance?.RegisterObserver<PlayerUpdateLevelTopic>(this);
-        Observer.Instance?.RegisterObserver<PlayerDeadStateTopic>(this);
+        ObserverAutoSh.RegisterObserver<PlayerUpdateLevelTopic>(this);
+        ObserverAutoSh.RegisterObserver<PlayerDeadStateTopic>(this);
     }
 
     private void OnDisable()
     {
-        Observer.Instance?.RemoveObserver<PlayerUpdateLevelTopic>(this);
-        Observer.Instance?.RemoveObserver<PlayerDeadStateTopic>(this);
+        ObserverAutoSh.RemoveObserver<PlayerUpdateLevelTopic>(this);
+        ObserverAutoSh.RemoveObserver<PlayerDeadStateTopic>(this);
     }
 
     public void OnObserverNotify(PlayerUpdateLevelTopic data)
@@ -29,7 +29,7 @@ public class MainGameDecision : MonoBehaviour
         {
             MainGamePlayTopic mainGamePlayTopic = new MainGamePlayTopic();
             mainGamePlayTopic.action = MainGamePlayTopicAction.WIN_GAME;
-            Observer.Instance.NotifyObservers(mainGamePlayTopic);
+            ObserverAutoSh.NotifyObservers(mainGamePlayTopic);
         }
     }
 
@@ -37,6 +37,6 @@ public class MainGameDecision : MonoBehaviour
     {
         MainGamePlayTopic mainGamePlayTopic = new MainGamePlayTopic();
         mainGamePlayTopic.action = MainGamePlayTopicAction.LOSE_GAME;
-        Observer.Instance.NotifyObservers(mainGamePlayTopic);
+        ObserverAutoSh.NotifyObservers(mainGamePlayTopic);
     }
 }

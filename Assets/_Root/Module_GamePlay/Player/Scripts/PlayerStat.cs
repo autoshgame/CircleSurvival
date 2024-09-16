@@ -25,6 +25,6 @@ public class PlayerStat : MonoBehaviour
 
         PlayerUpdateLevelTopic playerUpdateLevelTopic = new PlayerUpdateLevelTopic();
         playerUpdateLevelTopic.level = level;
-        Observer.Instance?.NotifyObservers(playerUpdateLevelTopic);
+        ObserverAutoSh.NotifyObservers(playerUpdateLevelTopic);
     }
 }

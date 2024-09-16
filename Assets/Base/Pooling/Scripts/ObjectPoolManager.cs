@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
-using AutoShGame.Base.MonoSingleton;
-using AutoShGame.Base.Observer;
+
 
 namespace AutoShGame.Base.Pooling
 {
-    public class ObjectPoolManager : Singleton<ObjectPoolManager>
+    public class ObjectPoolManager : MonoBehaviour
     {
         private Dictionary<System.Type, object> poolDictionary = new Dictionary<System.Type, object>();
 

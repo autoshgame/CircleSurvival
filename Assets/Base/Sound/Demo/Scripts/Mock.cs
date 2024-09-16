@@ -10,22 +10,25 @@ namespace AutoShGame.Base.Sound
         // Start is called before the first frame update
         IEnumerator Start()
         {
+
             //ISourceSoundInfo iSourceSOundInfo = SoundManager.Instance.Play(audioMock, sourceConfigType: SourceConfigType.TwoD, parent: this.transform);
             //iSourceSOundInfo.Play();
             SoundTopic soundTopic = null;
 
             ISourceSoundInfo soundInfo = null;
 
-            soundTopic = new SoundTopic(audioMock, SourceConfigType.ThreeD, (value) => soundInfo = value, false);
-            Observer.Observer.Instance.NotifyObservers(soundTopic);
-            yield return new WaitUntil(() => soundInfo != null);
-            soundInfo.Play();
+            yield return null;
 
-            yield return new WaitForSeconds(1f);
+            //soundTopic = new SoundTopic(audioMock, SourceConfigType.ThreeD, (value) => soundInfo = value, false);
+            //ObserverAutoSh.ObserverAutoSh.NotifyObservers(soundTopic);
+            //yield return new WaitUntil(() => soundInfo != null);
+            //soundInfo.Play();
 
-            soundTopic = new SoundTopic(audioMock);
-            Observer.Observer.Instance.NotifyObservers(soundTopic);
-            soundInfo.Play();
+            //yield return new WaitForSeconds(1f);
+
+            //soundTopic = new SoundTopic(audioMock);
+            //ObserverAutoSh.ObserverAutoSh.NotifyObservers(soundTopic);
+            //soundInfo.Play();
 
 
             /*

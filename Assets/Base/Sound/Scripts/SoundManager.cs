@@ -17,13 +17,12 @@ namespace AutoShGame.Base.Sound
     /// 4 : Pause, Start An audio source and OnDone Callback <br></br>
     /// 5 : AudioSource config (Can we seperate create audiosource + play ?)
     /// </summary>
-    [DefaultExecutionOrder(-99)]
-    public class SoundManager : Singleton<SoundManager>
+    public class SoundManager : MonoBehaviour
     {
         private List<AudioSource> currentPlayAudioSource = new List<AudioSource>();
         private List<AudioSource> donePlayAudioSource = new List<AudioSource>();
 
-        private SourceSoundInfoTypeResolver typeResolver = new SourceSoundInfoTypeResolver();
+        private Type typeImplementation;
         private SourceConfigResolver configResolver = new SourceConfigResolver();
 
         private float configVolume = 1;
@@ -33,21 +32,19 @@ namespace AutoShGame.Base.Sound
             ISourceSoundInfo iSourceSoundInfo = null;
             AudioSource audioSource = null;
 
-            Type T = typeResolver.ResolveType();
-
             if (donePlayAudioSource.Count > 0) 
             {
                 audioSource = donePlayAudioSource[donePlayAudioSource.Count - 1];
                 donePlayAudioSource.RemoveAt(donePlayAudioSource.Count - 1);
                 AddPlayAudioSource(audioSource, audio, loop, audio.name, sourceConfigType);
-                iSourceSoundInfo = audioSource.GetComponent(T) as ISourceSoundInfo;
+                iSourceSoundInfo = audioSource.GetComponent(typeImplementation) as ISourceSoundInfo;
             }
             else
             {
                 GameObject source = new GameObject();
                 audioSource = source.AddComponent<AudioSource>();
                 AddPlayAudioSource(audioSource, audio, loop, audio.name, sourceConfigType);
-                iSourceSoundInfo = source.AddComponent(T) as ISourceSoundInfo;
+                iSourceSoundInfo = source.AddComponent(typeImplementation) as ISourceSoundInfo;
             }
 
             if (parent != null) audioSource.transform.parent = parent;
@@ -59,16 +56,14 @@ namespace AutoShGame.Base.Sound
         public void Play(AudioClip audio, Vector3 position, SourceConfigType sourceConfigType = SourceConfigType.TwoD, bool loop = false)
         {
             ISourceSoundInfo iSourceSoundInfo = null;
-            AudioSource audioSource = null;
-
-            Type T = typeResolver.ResolveType();
+            AudioSource audioSource = null;;
 
             if (donePlayAudioSource.Count > 0)
             {
                 audioSource = donePlayAudioSource[donePlayAudioSource.Count - 1];
                 donePlayAudioSource.RemoveAt(donePlayAudioSource.Count - 1);
                 AddPlayAudioSource(audioSource, audio, loop, audio.name, sourceConfigType);
-                iSourceSoundInfo = audioSource.GetComponent(T) as ISourceSoundInfo;
+                iSourceSoundInfo = audioSource.GetComponent(typeImplementation) as ISourceSoundInfo;
                 iSourceSoundInfo.ApplyGlobalConfig(configVolume);
             }
             else
@@ -76,7 +71,7 @@ namespace AutoShGame.Base.Sound
                 GameObject source = new GameObject();
                 audioSource = source.AddComponent<AudioSource>();
                 AddPlayAudioSource(audioSource, audio, loop, audio.name, sourceConfigType);
-                iSourceSoundInfo = source.AddComponent(T) as ISourceSoundInfo;
+                iSourceSoundInfo = source.AddComponent(typeImplementation) as ISourceSoundInfo;
                 iSourceSoundInfo.ApplyGlobalConfig(configVolume);
             }
 
@@ -132,6 +127,11 @@ namespace AutoShGame.Base.Sound
             {
                  source.gameObject.GetComponent<ISourceSoundInfo>().ApplyGlobalConfig(configVolume);
             }
+        }
+
+        public void SetISoundSourceInfoImpl(Type type)
+        {
+            this.typeImplementation = type;
         }
     }
 }
