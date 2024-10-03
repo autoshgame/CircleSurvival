@@ -2,8 +2,7 @@ using UnityEngine;
 using AutoShGame.Base.Modal;
 using UnityEngine.UI;
 using DG.Tweening;
-using AutoShGame.Base.Sound;
-using AutoShGame.Base.Observer;
+using AutoShGame.Base.ServiceProvider;
 
 public class SettingsModal : BaseModal
 {
@@ -40,8 +39,7 @@ public class SettingsModal : BaseModal
     void OnSliderValueChanged(float value)
     {
         PlayerPrefs.SetFloat(Constant.KEY_CONFIG_VOLUME, value);
-        SoundGlobalConfigTopic globalConfigTopic = new SoundGlobalConfigTopic(value);
-        ObserverAutoSh.NotifyObservers(globalConfigTopic);
+        ServiceProvider.Resolve<ISoundService>().ChangeVolume(value);
     }
 }
 

@@ -1,6 +1,8 @@
 using AutoShGame.Base.FSMState;
 using AutoShGame.Base.Sound;
 using AutoShGame.Base.Observer;
+using AutoShGame.Base.ServiceProvider;
+using UnityEngine;
 
 public class PlayerUpdateLevelState : FSMState
 {
@@ -21,8 +23,8 @@ public class PlayerUpdateLevelState : FSMState
         dependency.component.txtLevel.text = dependency.component.stat.level.ToString();
         dependency.component.weapon.SetLevel(dependency.component.stat.level);
         dependency.component.manager.ChangeState(PlayerState.IDLE);
-        SoundTopic soundTopic = new SoundTopic(dependency.component.audioUpgradeLevel, SourceConfigType.TwoD);
-        ObserverAutoSh.NotifyObservers(soundTopic);
+
+        ServiceProvider.Resolve<ISoundService>().Play(dependency.component.audioUpgradeLevel, Vector3.zero);
     }
 
     public override void OnExit()

@@ -2,7 +2,7 @@ using AutoShGame.Base.FSMState;
 using AutoShGame.Base.Observer;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using AutoShGame.Base.Modal;
+using AutoShGame.Base.ServiceProvider;
 
 
 namespace CircleSurvival.Module.HomeMenu
@@ -43,9 +43,7 @@ namespace CircleSurvival.Module.HomeMenu
             switch (data.action)
             {
                 case HomeViewStateAction.OPEN_SETTINGS:
-                    ModalTopic modalTopic = new ModalTopic();
-                    modalTopic.modalType = typeof(SettingsModal);
-                    ObserverAutoSh.NotifyObservers(modalTopic);
+                    ServiceProvider.Resolve<IModalService>().Push<SettingsModal>().Show();
                     break;
                 case HomeViewStateAction.PLAY_GAME:
                     SceneManager.LoadScene("_MainGamePlay");

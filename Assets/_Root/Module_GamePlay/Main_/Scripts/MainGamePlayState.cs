@@ -1,7 +1,6 @@
 using AutoShGame.Base.FSMState;
 using AutoShGame.Base.Observer;
-using UnityEngine;
-using AutoShGame.Base.Modal;
+using AutoShGame.Base.ServiceProvider;
 
 public class MainGamePlayState : FSMState, IObservableAutoSh<MainGamePlayTopic>
 {
@@ -44,9 +43,7 @@ public class MainGamePlayState : FSMState, IObservableAutoSh<MainGamePlayTopic>
         }
         else if (data.action == MainGamePlayTopicAction.PAUSE_GAME)
         {
-            ModalTopic modalTopic = new ModalTopic();
-            modalTopic.modalType = typeof(InGameSettingsModal);
-            ObserverAutoSh.NotifyObservers(modalTopic);
+            ServiceProvider.Resolve<IModalService>().Push<InGameSettingsModal>().Show();
         }
     }
 }

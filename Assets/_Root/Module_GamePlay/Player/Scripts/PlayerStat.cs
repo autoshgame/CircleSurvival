@@ -1,15 +1,16 @@
-using System.Collections;
 using UnityEngine;
 using AutoShGame.Base.Observer;
 
 public class PlayerStat : MonoBehaviour
 {
+    //Refactor
     private PlayerFSMComponent playerFSMComponent;
 
     public int level;
 
     private void Awake()
     {
+        //Refactor
         playerFSMComponent = GetComponent<PlayerFSMComponent>();    
     }
 
@@ -19,7 +20,8 @@ public class PlayerStat : MonoBehaviour
     }
 
     public void IncreaseLevel()
-    {
+    { 
+        //Refactor
         level++;
         playerFSMComponent.manager.ChangeState(PlayerState.UPGRADE);
 

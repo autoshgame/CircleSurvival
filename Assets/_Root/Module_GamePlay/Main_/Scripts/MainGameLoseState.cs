@@ -3,6 +3,7 @@ using UnityEngine;
 using AutoShGame.Base.Modal;
 using AutoShGame.Base.Observer;
 using UnityEngine.SceneManagement;
+using AutoShGame.Base.ServiceProvider;
 
 public class MainGameLoseState : FSMState
 {
@@ -22,11 +23,7 @@ public class MainGameLoseState : FSMState
     {
         LoseModalData loseModalData = new LoseModalData();
         loseModalData.actionClickExit = ActionClickEndGame;
-
-        ModalTopic modalTopic = new ModalTopic();
-        modalTopic.modalData = loseModalData;
-        modalTopic.modalType = typeof(LoseModal);
-        ObserverAutoSh.NotifyObservers(modalTopic);
+        ServiceProvider.Resolve<IModalService>().Push<LoseModal>().InitData(loseModalData).Show();
     }
 
     public void ActionClickEndGame()

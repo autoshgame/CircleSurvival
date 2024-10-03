@@ -1,7 +1,6 @@
 using UnityEngine;
-using AutoShGame.Base.FSMState;
 using AutoShGame.Base.Sound;
-using AutoShGame.Base.Observer;
+using AutoShGame.Base.ServiceProvider;
 
 public class SwordV2 : BaseWeaponV2, ICollidable
 {
@@ -57,8 +56,7 @@ public class SwordV2 : BaseWeaponV2, ICollidable
 
     public void OnCollisionDetection()
     {
-        SoundTopic soundTopic = new SoundTopic(hitAudio, transform.position, SourceConfigType.ThreeD);
-        ObserverAutoSh.NotifyObservers(soundTopic);
+        ServiceProvider.Resolve<ISoundService>().Play(hitAudio, transform.position, SourceConfigType.ThreeD);
         rotateV2.ReverseRotate();
     }
 

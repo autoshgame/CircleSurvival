@@ -1,7 +1,6 @@
-using System.Collections;
 using UnityEngine;
 using AutoShGame.Base.Sound;
-using AutoShGame.Base.Observer;
+using AutoShGame.Base.ServiceProvider;
 
 public class HomeBGSoundController : MonoBehaviour
 {
@@ -10,16 +9,8 @@ public class HomeBGSoundController : MonoBehaviour
 
     public void PlaySound()
     {
-        SoundTopic bgSoundTopic = new SoundTopic(bgAudioClip, SourceConfigType.TwoD, OnReceiveSourceSound: (value) => sourceSoundInfo = value, loop: true);
-        ObserverAutoSh.NotifyObservers(bgSoundTopic);
-        StartCoroutine(IPlaySound());
-    }
-
-    IEnumerator IPlaySound()
-    {
-        yield return new WaitUntil(() => sourceSoundInfo != null);
+        sourceSoundInfo = ServiceProvider.Resolve<ISoundService>().PlayKeepSource(bgAudioClip, loop: true, parent: this.transform);
         sourceSoundInfo.Play();
-        sourceSoundInfo.SetParents(this.transform);
     }
 
     private void OnApplicationPause(bool pause)
@@ -33,8 +24,7 @@ public class HomeBGSoundController : MonoBehaviour
 
     private void OnDestroy()
     {
-        SoundReleaseTopic soundReleaseTopic = new SoundReleaseTopic(sourceSoundInfo.GetSourceID());
-        ObserverAutoSh.NotifyObservers(soundReleaseTopic);
+        ServiceProvider.Resolve<ISoundService>().Release(sourceSoundInfo.GetSourceID());
         sourceSoundInfo = null;
     }
 }

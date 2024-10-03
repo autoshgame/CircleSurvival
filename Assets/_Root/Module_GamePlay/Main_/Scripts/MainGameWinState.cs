@@ -1,9 +1,10 @@
 using AutoShGame.Base.FSMState;
 using UnityEngine;
-using AutoShGame.Base.Modal;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using AutoShGame.Base.Observer;
+using AutoShGame.Base.ServiceProvider;
+
 
 public class MainGameWinState : FSMState
 {
@@ -67,11 +68,7 @@ public class MainGameWinState : FSMState
         winModalData.actionReplay = Replay;
         winModalData.coinReceived = coinForWinState;
 
-        ModalTopic modalTopic = new ModalTopic();
-        modalTopic.modalType = typeof(WinModal);
-        modalTopic.modalData = winModalData;
-        ObserverAutoSh.NotifyObservers(modalTopic);
-
+        ServiceProvider.Resolve<IModalService>().Push<WinModal>().InitData(winModalData).Show();
     }
 
     private void Exit()

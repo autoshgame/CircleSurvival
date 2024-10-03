@@ -13,9 +13,6 @@ namespace AutoShGame.Base.Sound
 
             //ISourceSoundInfo iSourceSOundInfo = SoundManager.Instance.Play(audioMock, sourceConfigType: SourceConfigType.TwoD, parent: this.transform);
             //iSourceSOundInfo.Play();
-            SoundTopic soundTopic = null;
-
-            ISourceSoundInfo soundInfo = null;
 
             yield return null;
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using AutoShGame.Base.Observer;
-using AutoShGame.Base.Sound;
+using AutoShGame.Base.ServiceProvider;
 
 public class ShopItem : MonoBehaviour
 {
@@ -53,8 +53,7 @@ public class ShopItem : MonoBehaviour
         ObserverAutoSh.NotifyObservers<ShopViewStateTopic>(shopViewStateTopic);
         //Event
 
-        SoundTopic soundTopic = new SoundTopic(audioClick);
-        ObserverAutoSh.NotifyObservers(soundTopic);
+        ServiceProvider.Resolve<ISoundService>().Play(audioClick, Vector2.zero);
     }
 }
 
