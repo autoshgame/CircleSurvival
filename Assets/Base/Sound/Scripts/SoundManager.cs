@@ -10,12 +10,7 @@ namespace AutoShGame.Base.Sound
     /// Base class for sound manager
     /// <br></br>
     /// <br></br>
-    /// Mising : <br></br>
-    /// 1 : Volume <br></br>
-    /// 2 : Channel : In_Game, VFX,SFX <br></br>
-    /// 3 : Modification for audio source <br></br>
-    /// 4 : Pause, Start An audio source and OnDone Callback <br></br>
-    /// 5 : AudioSource config (Can we seperate create audiosource + play ?)
+    /// Missing : Multiple type of audio : sfx, vfx, ...
     /// </summary>
     public class SoundManager : MonoBehaviour
     {

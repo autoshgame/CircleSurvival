@@ -19,10 +19,5 @@ namespace AutoShGame.Base.Pooling
         {
 
         }
-
-        private void OnDisable()
-        {
-            objectPoolManager.GetPool<TestPool>().ReturnToPool(this);
-        }
     }
 }

@@ -15,13 +15,13 @@ namespace AutoShGame.Base.Pooling
         void Awake()
         {
             // Get the object pooler for GameObjects with specified parameters
-            poolManager.CreatePool<TestPool>(prefabToPool, amountToPool);
+            gameObjectPooler = poolManager.CreatePool("Player", prefabToPool, amountToPool);
         }
 
         private IEnumerator Start()
         {
             yield return new WaitForSeconds(10f);
-            poolManager.RemovePool<TestPool>();
+            poolManager.RemovePool<TestPool>("Player");
         }
     }
 }

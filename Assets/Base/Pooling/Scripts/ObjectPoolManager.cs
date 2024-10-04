@@ -1,56 +1,53 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace AutoShGame.Base.Pooling
 {
     public class ObjectPoolManager : MonoBehaviour
     {
-        private Dictionary<System.Type, object> poolDictionary = new Dictionary<System.Type, object>();
+        private Dictionary<string, object> poolDictionary = new Dictionary<string, object>();
 
-        public GenericObjectPooler<T> CreatePool<T>(T prefab, int amountToPool) where T : MonoBehaviour
+        public GenericObjectPooler<T> CreatePool<T>(string key, T prefab, int amountToPool) where T : MonoBehaviour
         {
-            System.Type type = typeof(T);
-
-            if (!poolDictionary.ContainsKey(type))
+            if (string.IsNullOrEmpty(key))
             {
-                poolDictionary[type] = new GenericObjectPooler<T>(prefab, amountToPool);
+                Debug.LogError("Pool key cannot be null or empty.");
+                return null;
             }
 
-            return (GenericObjectPooler<T>)poolDictionary[type];
+            if (poolDictionary.ContainsKey(key))
+            {
+                Debug.LogWarning($"Pool with key '{key}' already exists. Returning existing pool.");
+                return (GenericObjectPooler<T>)poolDictionary[key];
+            }
+
+            var pooler = new GenericObjectPooler<T>(prefab, amountToPool);
+            poolDictionary[key] = pooler;
+            return pooler;
         }
 
-        public GenericObjectPooler<T> GetPool<T>() where T : MonoBehaviour
+        public GenericObjectPooler<T> GetPool<T>(string key) where T : MonoBehaviour
         {
-            System.Type type = typeof(T);
-
-            if (poolDictionary.ContainsKey(type))
+            if (poolDictionary.TryGetValue(key, out var pool))
             {
-                return (GenericObjectPooler<T>)poolDictionary[type];
+                return (GenericObjectPooler<T>)pool;
             }
 
-            Debug.LogError("NO POOL AVAILABLE");
+            Debug.LogError($"No pool available with key '{key}'.");
             return null;
         }
 
-        public void RemovePool<T>() where T : MonoBehaviour
+        public void RemovePool<T>(string key) where T : MonoBehaviour
         {
-            System.Type type = typeof(T);
-
-            if (poolDictionary.ContainsKey(type))
+            if (poolDictionary.TryGetValue(key, out var pool))
             {
-                // Optionally clean up pooled objects before removing the pool
-                // Example:
-                // var pooler = (GenericObjectPooler<T>)poolDictionary[type];
-                // pooler.Clear(); // Implement Clear() method in GenericObjectPooler if needed
-
-                var pooler = (GenericObjectPooler<T>)poolDictionary[type];
+                var pooler = (GenericObjectPooler<T>)pool;
                 pooler.Clear();
-                poolDictionary.Remove(type);
+                poolDictionary.Remove(key);
             }
             else
             {
-                Debug.LogWarning($"No pool of type {typeof(T)} found to remove.");
+                Debug.LogWarning($"No pool with key '{key}' found to remove.");
             }
         }
     }
