@@ -4,68 +4,15 @@ using System.IO;
 using System;
 using AutoShGame.Base.Observer;
 
-public class PlayerDataManager : MonoBehaviour, IObservableAutoSh<CurrencyDataTopic>, IObservableAutoSh<SkinDataTopic>
+public class PlayerDataManager : MonoBehaviour, IDataService
 {
     private string filepath;
     private PlayerData userData;
-
-    CurrencyData currencyGroup = new CurrencyData();
-    SkinData skinData = new SkinData();
 
     private void Awake()
     {
         filepath = $"{Application.persistentDataPath}/user.json";
         LoadUserData();
-    }
-
-    private void OnEnable()
-    {
-        ObserverAutoSh.RegisterObserver<CurrencyDataTopic>(this);
-        ObserverAutoSh.RegisterObserver<SkinDataTopic>(this);
-    }
-
-    private void OnDisable()
-    {
-        ObserverAutoSh.RemoveObserver<CurrencyDataTopic>(this);
-        ObserverAutoSh.RemoveObserver<SkinDataTopic>(this);
-    }
-
-    public void OnObserverNotify(CurrencyDataTopic data)
-    {
-        LoadUserData();
-
-        if (data.actionType == ActionType.GET)
-        {
-            currencyGroup.coin = userData.currency.coin;
-            data.result?.Invoke(currencyGroup);
-            data.onLoadSuccess?.Invoke(true);
-        }
-        else if (data.actionType == ActionType.UPDATE)
-        {
-            userData.currency.coin = data.updateData.coin;
-            SaveUserData();
-            data.onLoadSuccess?.Invoke(true);
-        }
-    }
-
-    public void OnObserverNotify(SkinDataTopic data)
-    {
-        LoadUserData();
-
-        if (data.actionType == ActionType.GET)
-        {
-            skinData.choosenSword = userData.weapon.currentSword;
-            skinData.ownedSwords = userData.weapon.availableSword;
-            data.result?.Invoke(skinData);
-            data.onLoadSuccess?.Invoke(true);
-        }
-        else if (data.actionType == ActionType.UPDATE)
-        {
-            userData.weapon.currentSword = data.updateData.choosenSword;
-            userData.weapon.availableSword = data.updateData.ownedSwords;
-            SaveUserData();
-            data.onLoadSuccess?.Invoke(true);
-        }
     }
 
     private void LoadUserData()
@@ -94,6 +41,23 @@ public class PlayerDataManager : MonoBehaviour, IObservableAutoSh<CurrencyDataTo
             File.Delete(filepath);
         }
     }
+
+    public PlayerData GetUserData()
+    {
+        return userData;
+    }
+
+    public void SaveUserData(PlayerData playerData)
+    {
+        userData = playerData;
+        SaveUserData();
+    }
+}
+
+public interface IDataService
+{
+    public PlayerData GetUserData();
+    public void SaveUserData(PlayerData playerData);
 }
 
 [Serializable]
@@ -131,24 +95,6 @@ public class Weapon
 }
 
 [System.Serializable]
-public class CurrencyDataTopic
-{
-    public Action<CurrencyData> result;
-    public CurrencyData updateData;
-    public Action<bool> onLoadSuccess;
-    public ActionType actionType;
-}
-
-[System.Serializable]
-public class SkinDataTopic
-{
-    public Action<SkinData> result;
-    public SkinData updateData;
-    public Action<bool> onLoadSuccess;
-    public ActionType actionType;
-}
-
-[System.Serializable]
 public class SkinData
 {
     public List<SwordEnum> ownedSwords;
@@ -159,14 +105,6 @@ public class SkinData
 public class CurrencyData
 {
     public int coin;
-}
-
-public enum ActionType
-{
-    GET,
-    INSERT,
-    UPDATE,
-    DELETE
 }
 
 

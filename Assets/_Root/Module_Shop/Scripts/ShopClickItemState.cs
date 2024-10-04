@@ -2,15 +2,25 @@ using UnityEngine;
 using AutoShGame.Base.FSMState;
 using System.Collections;
 using AutoShGame.Base.Observer;
-using System.Linq;
+using AutoShGame.Base.ServiceProvider;
 
 public class ShopClickItemState : FSMState
 {
     private ShopFSMDependency dependency;
     private ShopItemData itemClick;
 
-    bool isUpdateCurrencyDataSuccess = false;
-    bool isUpdateSkinDataSuccess = false;
+    private IDataService dataService;
+    private IDataService DataService
+    {
+        get 
+        {
+            if (dataService == null)
+            {
+                dataService = ServiceProvider.Resolve<IDataService>();
+            }
+            return dataService;
+        }
+    }
 
     public override string GetState()
     {
@@ -26,6 +36,8 @@ public class ShopClickItemState : FSMState
     {
         itemClick = data as ShopItemData;
 
+        PlayerData playerData = DataService.GetUserData();
+
         if (itemClick.itemState == ShopItemState.SELECTED)
         {
             dependency.component.manager.ChangeState(ShopEvent.VIEW);
@@ -34,61 +46,24 @@ public class ShopClickItemState : FSMState
         else if (itemClick.itemState == ShopItemState.OWNED && itemClick.itemState != ShopItemState.SELECTED)
         {
             //Set selected for component
-            dependency.component.skinData.choosenSword = itemClick.skin;
-
-            StartCoroutine(UpdateSelectedSkin());
+            playerData.weapon.currentSword = itemClick.skin;
+            OnReselectedComponent();
         }
         else
         {
-            if (dependency.component.currency.coin < itemClick.price)
+            if (playerData.currency.coin < itemClick.price)
             {
                 dependency.component.manager.ChangeState(ShopEvent.VIEW);
             }
-            else if (dependency.component.currency.coin >= itemClick.price)
+            else if (playerData.currency.coin >= itemClick.price)
             {
-                dependency.component.currency.coin = dependency.component.currency.coin - itemClick.price;
-                dependency.component.skinData.choosenSword = itemClick.skin;
-                dependency.component.skinData.ownedSwords.Add(itemClick.skin);
-               
-                StartCoroutine(UpdateCurrency());
+                playerData.currency.coin -= itemClick.price;
+                playerData.weapon.currentSword = itemClick.skin;
+                playerData.weapon.availableSword.Add(itemClick.skin);
+                DataService.SaveUserData(playerData);
+                OnReselectedComponent();
             }
         }
-    }
-
-    IEnumerator UpdateCurrency()
-    {
-        CurrencyDataTopic topic = new CurrencyDataTopic();
-        topic.actionType = ActionType.UPDATE;
-        topic.updateData = dependency.component.currency;
-        topic.onLoadSuccess = (value) => isUpdateCurrencyDataSuccess = value;
-        ObserverAutoSh.NotifyObservers(topic);
-
-        SkinDataTopic skinDataTopic = new SkinDataTopic();
-        skinDataTopic.actionType = ActionType.UPDATE;
-        skinDataTopic.updateData = dependency.component.skinData;
-        skinDataTopic.onLoadSuccess = (value) => isUpdateSkinDataSuccess = value;
-        ObserverAutoSh.NotifyObservers(skinDataTopic);
-
-        yield return new WaitUntil(() => (isUpdateCurrencyDataSuccess && isUpdateSkinDataSuccess));
-
-        dependency.component.txtShopAmountCoin.text = dependency.component.currency.coin.ToString();
-
-        OnReselectedComponent();
-    }
-
-    IEnumerator UpdateSelectedSkin()
-    {
-        isUpdateSkinDataSuccess = false;
-
-        SkinDataTopic skinDataTopic = new SkinDataTopic();
-        skinDataTopic.actionType = ActionType.UPDATE;
-        skinDataTopic.updateData = dependency.component.skinData;
-        skinDataTopic.onLoadSuccess = (value) => isUpdateSkinDataSuccess = value;
-        ObserverAutoSh.NotifyObservers(skinDataTopic);
-
-        yield return new WaitUntil(() => (isUpdateSkinDataSuccess));
-
-        OnReselectedComponent();
     }
 
     public void OnReselectedComponent()
@@ -97,7 +72,6 @@ public class ShopClickItemState : FSMState
         newItem.SetItemState(ShopItemState.SELECTED);
         dependency.component.curSelectedItem.SetItemState(ShopItemState.OWNED);
         dependency.component.curSelectedItem = newItem;
-
         dependency.component.manager.ChangeState(ShopEvent.VIEW);
     }
 

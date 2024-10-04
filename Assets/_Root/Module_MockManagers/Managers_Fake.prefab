@@ -49,6 +49,7 @@ MonoBehaviour:
   config: {fileID: 11400000, guid: eaed3e02c7e502c4882f305ea4fa941c, type: 2}
   modalSerivce: {fileID: 354283584928991021}
   soundService: {fileID: 1019399139488636997}
+  dataService: {fileID: 1964160384981050853}
 --- !u!1001 &1414078009
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -257,3 +258,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1964160385632590268, guid: 94aa2868efef6404fa7affaeaa2111a9, type: 3}
   m_PrefabInstance: {fileID: 2134309978}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1964160384981050853 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1964160385632590271, guid: 94aa2868efef6404fa7affaeaa2111a9, type: 3}
+  m_PrefabInstance: {fileID: 2134309978}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e674068743a31458c328d4ce76ed06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,7 +1,7 @@
 using AutoShGame.Base.FSMState;
 using AutoShGame.Base.Observer;
-using System.Collections;
 using UnityEngine;
+using AutoShGame.Base.ServiceProvider;
 
 public class PlayerInitState : FSMState
 {
@@ -23,25 +23,15 @@ public class PlayerInitState : FSMState
     {
         base.OnEnter();
 
-        StartCoroutine(LoadUserDataAndInitComponent());
+        LoadUserDataAndInitComponent();
     }
 
-    IEnumerator LoadUserDataAndInitComponent()
+    void LoadUserDataAndInitComponent()
     {
         SwordEnum userSwordData = SwordEnum.SWORD_1;
 
-        //Load skin data
-        SkinDataTopic skinDataTopic = new SkinDataTopic();
-        skinDataTopic.result = (value) => {
-            userSwordData = value.choosenSword;
-        };
+        userSwordData = ServiceProvider.Resolve<IDataService>().GetUserData().weapon.currentSword;
 
-        skinDataTopic.actionType = ActionType.GET;
-        skinDataTopic.onLoadSuccess = (value) => { isLoadSkinDataSuccess = value; };
-        ObserverAutoSh.NotifyObservers(skinDataTopic);
-        //end load skin data
-
-        yield return new WaitUntil(() => isLoadSkinDataSuccess);
         SwordV2Data swordV2Data = new SwordV2Data();
         swordV2Data.sword = userSwordData;
         swordV2Data.parents = playerFSMDependency.component.playerRigidbody2D.gameObject.transform;

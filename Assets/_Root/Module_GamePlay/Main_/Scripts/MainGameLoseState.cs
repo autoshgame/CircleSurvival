@@ -1,7 +1,4 @@
 using AutoShGame.Base.FSMState;
-using UnityEngine;
-using AutoShGame.Base.Modal;
-using AutoShGame.Base.Observer;
 using UnityEngine.SceneManagement;
 using AutoShGame.Base.ServiceProvider;
 

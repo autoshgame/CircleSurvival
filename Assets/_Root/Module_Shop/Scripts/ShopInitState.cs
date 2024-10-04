@@ -1,17 +1,12 @@
 using AutoShGame.Base.FSMState;
 using UnityEngine;
-using AutoShGame.Base.Observer;
 using System.Collections.Generic;
 using System.Collections;
 using DG.Tweening;
+using AutoShGame.Base.ServiceProvider;
 
 public class ShopInitState : FSMState
 {
-    private bool isLoadCurrencyDataSuccess;
-    private bool isLoadSkinDataSuccess;
-
-    [SerializeField] private bool isMockData;
-
     private ShopFSMDependency dependency;
 
     public override string GetState()
@@ -32,32 +27,8 @@ public class ShopInitState : FSMState
 
     IEnumerator InitShop()
     {
-        //Load currency data (coin)
-        CurrencyDataTopic testGameDataTopic = new CurrencyDataTopic();
-        testGameDataTopic.result = (value) => {
-            dependency.component.currency.coin = value.coin;
-        };
-
-        testGameDataTopic.actionType = ActionType.GET;
-        testGameDataTopic.onLoadSuccess = (value) => { isLoadCurrencyDataSuccess = value; };
-        ObserverAutoSh.NotifyObservers(testGameDataTopic);
-        //end load currency data
-
-        //Load skin data
-        SkinDataTopic skinDataTopic = new SkinDataTopic();
-        skinDataTopic.result = (value) => {
-            dependency.component.skinData.ownedSwords = value.ownedSwords;
-            dependency.component.skinData.choosenSword = value.choosenSword;
-        };
-
-        skinDataTopic.actionType = ActionType.GET;
-        skinDataTopic.onLoadSuccess = (value) => { isLoadSkinDataSuccess = value; };
-        ObserverAutoSh.NotifyObservers(skinDataTopic);
-        //end load skin data
-
-        yield return new WaitUntil(() => isLoadCurrencyDataSuccess && isLoadSkinDataSuccess);
-
-        dependency.component.txtShopAmountCoin.text = dependency.component.currency.coin.ToString();
+        var userData = ServiceProvider.Resolve<IDataService>().GetUserData();
+        dependency.component.txtShopAmountCoin.text = userData.currency.coin.ToString();
 
         dependency.component.contentShop.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.Flash);
         yield return new WaitForSeconds(0.3f);
@@ -76,7 +47,7 @@ public class ShopInitState : FSMState
             data.price = item.Value.coin;
             data.skin = item.Key;
 
-            if (dependency.component.skinData.ownedSwords.Contains(item.Key))
+            if (userData.weapon.availableSword.Contains(item.Key))
             {
                 data.itemState = ShopItemState.OWNED;
             }
@@ -85,7 +56,7 @@ public class ShopInitState : FSMState
                 data.itemState = ShopItemState.NOT_BOUGHT;
             }
 
-            if (dependency.component.skinData.choosenSword == item.Key)
+            if (userData.weapon.currentSword == item.Key)
             {
                 data.itemState = ShopItemState.SELECTED;
                 indexChoosenSword = indexDataItemId;

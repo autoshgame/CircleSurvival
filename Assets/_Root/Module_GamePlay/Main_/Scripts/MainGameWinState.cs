@@ -32,36 +32,9 @@ public class MainGameWinState : FSMState
         mainGameFSMDependency.component.playerFSMComponent.weapon.SetStatus(false);
         mainGameFSMDependency.component.playerFSMComponent.weapon.transform.localScale = Vector3.zero;
 
-        StartCoroutine(UpdatePlayerCurrency());
-    }
-
-    IEnumerator UpdatePlayerCurrency()
-    {
-        //Load currency data (coin)
-        CurrencyData currencyData = new CurrencyData();
-
-        CurrencyDataTopic testGameDataTopic = new CurrencyDataTopic();
-        testGameDataTopic.result = (value) => {
-            currencyData = value;
-        };
-
-        testGameDataTopic.actionType = ActionType.GET;
-        testGameDataTopic.onLoadSuccess = (value) => { isLoadCurrencyDataSuccess = value; };
-        ObserverAutoSh.NotifyObservers(testGameDataTopic);
-        //end load currency data
-
-        yield return new WaitUntil(() => isLoadCurrencyDataSuccess);
-        currencyData.coin += coinForWinState;
-
-        //Update currency data (coin)
-        CurrencyDataTopic topic = new CurrencyDataTopic();
-        topic.actionType = ActionType.UPDATE;
-        topic.updateData = currencyData;
-        topic.onLoadSuccess = (value) => isUpdateCurrencyDataSuccess = value;
-        ObserverAutoSh.NotifyObservers(topic);
-
-        yield return new WaitUntil(() => isUpdateCurrencyDataSuccess);
-        //end Update currency data
+        PlayerData playerData = ServiceProvider.Resolve<IDataService>().GetUserData();
+        playerData.currency.coin += coinForWinState;
+        ServiceProvider.Resolve<IDataService>().SaveUserData(playerData);
 
         WinModalData winModalData = new WinModalData();
         winModalData.actionExit = Exit;

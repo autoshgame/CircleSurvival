@@ -14,22 +14,6 @@ public class TestGetData : MonoBehaviour
 
     IEnumerator GetData()
     {
-        CurrencyData group = new CurrencyData();
-
-        bool isLoadSuccess = false;
-
-        CurrencyDataTopic testGameDataTopic = new CurrencyDataTopic();
-
-        testGameDataTopic.result = (value) => { 
-            group.coin = value.coin; 
-        };
-        
-        testGameDataTopic.actionType = ActionType.GET;
-        testGameDataTopic.onLoadSuccess = (value) => { isLoadSuccess = value; };
-        ObserverAutoSh.NotifyObservers(testGameDataTopic);
-
-        yield return new WaitUntil(() => isLoadSuccess == true);
-
-        Debug.Log($"GET DATA : {group.coin}");
+        yield return null;
     }
 }
