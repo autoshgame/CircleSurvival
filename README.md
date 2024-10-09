@@ -1,9 +1,15 @@
 # CircleSurvival
 [Ghoshittttt]
 
-- So boring to do this, but things i have done in this project :
-+ 1st : Service Provider Pattern. Why ?. I dont want to plan to use DI in this project because its kinda big and out of my scope, so i choose, maybe an easier implementation. Yeah but this implementation can works with DI (If you want to)
-+ 2nd : The FSM state. It kinda a powerfull tools i can use. I use it all of my project, with a flexible way to create, just to be sad that if you use inheriance of my FSMManager, you can not use another class (Inheritance), btw you need to use the interface hero. I use it all in my map, my enemy, ...
-+ 3rd : The Observer due stick with multiple event. I dont plan to use string, cause it is kinda award to create string in a const script, so i use T. kinda flexible but performace exchanged
-+ 4th : Needs a little improment in how to use component. The component shouldn't reference to the father, just rather use the component father pass down. If two component need to know each other (The move of the enemy need the target to move, or if the target is null, it request another scan), should be used in action. Or the component move, need to use velocity or transform, need to be passed using the FSM state. It will make it flexible to use in other places (If you want to reuse), or you are making minigames and you dont want to reuse all the old scripts, just write your own, yeah. Game development is different from other software, it dont need to be too strict on software engineering, if too strict, the gameplay kinda sucks and you just lose tons of money. But in addition, in other software development, if some feature got changed, a sticky way and restrict way to implement feature will be very hard to scale and also, you, like others, dev, will kinda says: suckers. haha
+So boring to do this, but here are the things I have done in this project:
+
+- Service Provider Pattern: Why? I didn't want to plan on using Dependency Injection (DI) in this project because it's quite large and out of my scope, so I chose an easier implementation. However, this implementation can work with DI if you want to use it.
+
+- FSM State: This is a powerful tool that I used throughout my project. I created it in a flexible way, but I’m sad that if you inherit from my FSMManager, you cannot use another class (inheritance). You need to implement the interface for the hero. I used it in my map, my enemies, etc.
+
+- Observer Pattern: I opted for this due to its ability to handle multiple events. I didn’t plan to use strings because it’s awkward to create strings in a constant script, so I used generics (T). This choice is flexible but does come with a performance trade-off.
+
+- Component Usage: There’s room for improvement in how components interact. Components shouldn't reference their parent directly; instead, they should receive information from the parent. If two components need to communicate (like when an enemy moves towards a target, or if the target is null and it requests another scan), this should be handled in action. For instance, the movement component should use velocity or transform data passed down through the FSM state. This approach makes it flexible for reuse in other contexts, like mini-games, without having to carry over old scripts. Game development differs from other software; it doesn’t need to be overly strict with software engineering principles. If it is too rigid, it can negatively impact gameplay and lead to financial losses. On the other hand, in other software development, if a feature changes, a rigid implementation can make scaling difficult, and developers might end up frustrated.
+
+
 
