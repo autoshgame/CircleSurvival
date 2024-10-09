@@ -1,6 +1,9 @@
 # CircleSurvival
 [Ghoshittttt]
 
-Lười quá chả biết làm gì nữa, demo nhanh để làm nốt cái khác 
+- So boring to do this, but things i have done in this project :
++ 1st : Service Provider Pattern. Why ?. I dont want to plan to use DI in this project because its kinda big and out of my scope, so i choose, maybe an easier implementation. Yeah but this implementation can works with DI (If you want to)
++ 2nd : The FSM state. It kinda a powerfull tools i can use. I use it all of my project, with a flexible way to create, just to be sad that if you use inheriance of my FSMManager, you can not use another class (Inheritance), btw you need to use the interface hero. I use it all in my map, my enemy, ...
++ 3rd : The Observer due stick with multiple event. I dont plan to use string, cause it is kinda award to create string in a const script, so i use T. kinda flexible but performace exchanged
++ 4th : Needs a little improment in how to use component. The component shouldn't reference to the father, just rather use the component father pass down. If two component need to know each other (The move of the enemy need the target to move, or if the target is null, it request another scan), should be used in action. Or the component move, need to use velocity or transform, need to be passed using the FSM state. It will make it flexible to use in other places (If you want to reuse), or you are making minigames and you dont want to reuse all the old scripts, just write your own, yeah. Game development is different from other software, it dont need to be too strict on software engineering, if too strict, the gameplay kinda sucks and you just lose tons of money. But in addition, in other software development, if some feature got changed, a sticky way and restrict way to implement feature will be very hard to scale and also, you, like others, dev, will kinda says: suckers. haha
 
-Sử dụng chủ yếu Observer pattern cho hầu hết gần như tất cả mọi thứ -.-. 
